@@ -360,6 +360,7 @@ async def help(ctx, rank=None):
         help_admin.add_field(name="`.softban [user]`", value="Bans and unbans a user quickly.", inline=False)
         help_admin.add_field(name="`.clear [amount/all]`", value="Clears the chat of a text channel.", inline=False)
         help_admin.add_field(name="`.reactrole [mesage_id] [emoji] [role]`", value="Adds a role to a member if they react.", inline=False)
+        help_admin.add_field(name="`.say [message]`", value="Lat the bot send a message for you.", inline=False)
 
         await ctx.send(embed=help_admin)
     if rank == "fun":
@@ -405,6 +406,7 @@ async def help(ctx, rank=None):
         help_all.add_field(name="`.userinfo`", value="Replays the user info of a user.", inline=True)
         help_all.add_field(name="`.welcome [text channel/remove]`", value="Sets up a channel where join messages come in.", inline=True)
         help_all.add_field(name="`.softban [user]`", value="Bans and unbans a user quickly.", inline=True)
+        help_all.add_field(name="`.say [message]`", value="Lat the bot send a message for you.", inline=True)
 
         await ctx.send(embed=help_all)
 
@@ -607,8 +609,5 @@ async def displayembed(ctx):
 @tasks.loop(seconds=60)
 async def status_change():
     await bot.change_presence(status=discord.Status.idle, activity=discord.Game(next(status)))
-
-
-bot.run("NTM1NDg4MjYxODc1ODI2Njk5.XwQkyQ.MoQ0GUZqfl98NmeTwiYRC4r4K6M")
 
 bot.run(os.environ["token"])
