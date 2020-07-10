@@ -59,7 +59,25 @@ async def on_message(message):
         if message.content.count(word) > 0 :
             print("%s has cursed" % (message.author))
             await message.channel.purge(limit=1)
-    await bot.process_commands(message)
+            await message.channel.send(f"{message.author} had been warned")
+            warned = discord.Embed(
+                title="You're warned",
+                description=f"You're warned on the {message.guild} server.",
+                colour=discord.Colour.from_rgb(250, 250, 0)
+            )
+
+            warned.set_footer(text=f"#Warned On {message.guild}")
+            warned.set_image(url="https://media.discordapp.net/attachments/619413581145833472/729690305648918568/ezgif-5-8f75a4ba685b.gif?width=622&height=350")
+            warned.set_thumbnail(
+                url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
+            warned.set_author(name="Banathon",
+                            icon_url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
+            warned.add_field(name="Reason", value=f"using bad words", inline=False)
+            warned.add_field(name="Info", value="If you want more information, please contact our staff.", inline=False)
+
+            await message.author.send(embed=warned)
+            print(f"Warned {message.author} for using bad words")
+            await bot.process_commands(message)
 
     if say_make_title == True:
         content = message.content
@@ -585,8 +603,6 @@ async def clear(ctx, content=None):
         await ctx.channel.purge()
         await ctx.send("I have cleared `all your messages`:+1:")
         print(f"Cleared all messages in {ctx.channel} > {ctx.guild}:{ctx.guild.id}")
-        time.sleep(5)
-        await ctx.channel.purge(limit=1)
     else:
         amount = int(content)
         await ctx.channel.purge(limit=amount + 1)
@@ -595,8 +611,6 @@ async def clear(ctx, content=None):
         else:
             await ctx.send(f"`I have cleared {amount} messages`:+1:")
         print(f"Cleared {amount} messages in {ctx.channel} > {ctx.guild}:{ctx.guild.id}")
-        time.sleep(5)
-        await ctx.channel.purge(limit=1)
 
 
 @bot.command()
