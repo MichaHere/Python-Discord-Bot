@@ -18,7 +18,7 @@ status = cycle(["your commands", ".help to ask for help", "helpful commands"])
 
 bot.remove_command("help")
 
-reaction_role_message_id = ""
+reaction_role_message_id = []
 reaction_role_emoji = ""
 reaction_role_role = ""
 rock_paper_scissors = 0
@@ -211,6 +211,55 @@ async def on_message(message):
 async def convert(ctx, reason):
     reason = await commands.MemberConverter().convert(ctx, reason)
 
+
+@bot.event
+async def on_raw_reaction_add(payload):
+    global reaction_role_message_id
+    global reaction_role_emoji
+    global reaction_role_role
+    message_id = payload.message_id
+    emoji = reaction_role_emoji
+    for id in reaction_role_message_id:
+        if id == None:
+            if emoji == payload.emoji.name:
+                guild_id = payload.guild_id
+                guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
+
+                role = reaction_role_role
+
+                if role is not None:
+                    member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
+                    if member is not None:
+                        await discord.Member.add_roles(member, role)
+                        print(f"Added {role} to {member}")
+                    else:
+                        print(f"Error while adding role: member {member} not found")
+                else:
+                    print(f"Error while adding role: role {role} not found")
+            else:
+                print(f'Error while adding reaction role: emoji "{emoji}" not found')
+            
+        
+        if f"{message_id}" == id:
+            if emoji == payload.emoji.name:
+                guild_id = payload.guild_id
+                guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
+
+                role = reaction_role_role
+
+                if role is not None:
+                    member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
+                    if member is not None:
+                        await discord.Member.add_roles(member, role)
+                        print(f"Added {role} to {member}")
+                    else:
+                        print(f"Error while adding role: member {member} not found")
+                else:
+                    print(f"Error while adding role: role {role} not found")
+            else:
+                print(f'Error while adding reaction role: emoji "{emoji}" not found')
+
+
 @bot.event
 async def on_raw_reaction_remove(payload):
     global reaction_role_emoji
@@ -226,52 +275,7 @@ async def on_raw_reaction_remove(payload):
         if member is not None:
             await discord.Member.remove_roles(member, role)
             print(f"Removed {role} from {member}")
-
-@bot.event
-async def on_raw_reaction_add(payload):
-    global reaction_role_message_id
-    global reaction_role_emoji
-    global reaction_role_role
-    message_id = payload.message_id
-    emoji = reaction_role_emoji
-    if reaction_role_message_id == None:
-        if emoji == payload.emoji.name:
-            guild_id = payload.guild_id
-            guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
-
-            role = reaction_role_role
-
-            if role is not None:
-                member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
-                if member is not None:
-                    await discord.Member.add_roles(member, role)
-                    print(f"Added {role} to {member}")
-                else:
-                    print(f"Error while adding role: member {member} not found")
-            else:
-                print(f"Error while adding role: role {role} not found")
-        else:
-            print(f'Error while adding reaction role: emoji "{emoji}" not found')
         
-    
-    if f"{message_id}" == reaction_role_message_id:
-        if emoji == payload.emoji.name:
-            guild_id = payload.guild_id
-            guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
-
-            role = reaction_role_role
-
-            if role is not None:
-                member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
-                if member is not None:
-                    await discord.Member.add_roles(member, role)
-                    print(f"Added {role} to {member}")
-                else:
-                    print(f"Error while adding role: member {member} not found")
-            else:
-                print(f"Error while adding role: role {role} not found")
-        else:
-            print(f'Error while adding reaction role: emoji "{emoji}" not found')
 
 # BotCommands
 @bot.command()
@@ -609,7 +613,7 @@ async def reactrole(ctx, emoji, role: discord.Role, message_id=None):
     global reaction_role_role
     reaction_role_role = role
     reaction_role_emoji = emoji
-    reaction_role_message_id = message_id
+    reaction_role_message_id.append(message_id)
     await ctx.send(f"Added reaction role {emoji}")
     print(f"Added reaction role emoji= '{emoji}' message= '{message_id}' role= '{role}'")
 
