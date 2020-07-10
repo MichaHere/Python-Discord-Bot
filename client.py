@@ -581,7 +581,7 @@ async def softban(ctx, member: discord.Member, reason=None):
 @bot.command()
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx, content=None):
-    if content == "all":
+    if content == None:
         await ctx.channel.purge()
         await ctx.send("I have cleared `all your messages`:+1:")
         print(f"Cleared all messages in {ctx.channel} > {ctx.guild}:{ctx.guild.id}")
