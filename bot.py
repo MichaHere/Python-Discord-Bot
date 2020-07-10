@@ -3,6 +3,7 @@ import json
 import random
 import time
 import os
+import array
 import asyncio
 from  discord.ext import commands, tasks
 from itertools import cycle
@@ -13,12 +14,12 @@ def get_prefix(bot, message):
 
     return prefixses[str(message.guild.id)]
 
-bot = commands.Bot(command_prefix = get_prefix)
+bot = commands.Bot(command_prefix = ".")
 status = cycle(["your commands", ".help to ask for help", "helpful commands"])
 
 bot.remove_command("help")
 
-reaction_role_message_id = []
+reaction_role_message_id = ""
 reaction_role_emoji = ""
 reaction_role_role = ""
 rock_paper_scissors = 0
@@ -72,13 +73,31 @@ async def on_command_error(ctx, error):
 @bot.event
 async def on_message(message):
     global rock_paper_scissors, rock_paper_scissors_channel, rock_paper_scissors_play, say_make_title, say_content
-    filter = ["fuck", "kut", "idioot", "godverdomme"]
+    filter = ["fuck", "kut", "idioot", "godverdomme", "f*ck", "k*t", "idiot", "bitch", "b*tch", "asshole", "*sshole", "assh*le", "*ssh*le", "*diot", "id*ot", "idi*t", "*d*ot", "id**t", "*di*t", "*d**t", "hoer", "homo", "h*mo", "hom*", "h*m*", "lul", "tering", "t*ring", "klootzak", "klootz*k", "fck", "btch", "ass", "gvd", "f**k", "dick", "d*ck"]
 
     for word in filter:
         if message.content.count(word) > 0 :
             print("%s has cursed" % (message.author))
             await message.channel.purge(limit=1)
-    await bot.process_commands(message)
+            await message.channel.send("Can't use `bad words!`")
+            warned = discord.Embed(
+            title="You're warned",
+            description=f"You're warned on the {message.guild} server.",
+            colour=discord.Colour.from_rgb(250, 250, 0)
+            )
+
+            warned.set_footer(text=f"#Warned On {message.guild}")
+            warned.set_image(url="https://media.discordapp.net/attachments/619413581145833472/729690305648918568/ezgif-5-8f75a4ba685b.gif?width=622&height=350")
+            warned.set_thumbnail(
+                url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
+            warned.set_author(name="Banathon",
+                            icon_url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
+            warned.add_field(name="Reason", value=f"Swearing; your using bad words.", inline=False)
+            warned.add_field(name="Info", value="If you want more information, please contact our staff.", inline=False)
+
+            await message.author.send(embed=warned)
+            print(f"Warned {message.author} for swearing: using bad words")
+            await bot.process_commands(message)
 
     if say_make_title == True:
         content = message.content
@@ -214,50 +233,51 @@ async def convert(ctx, reason):
 
 @bot.event
 async def on_raw_reaction_add(payload):
-    global reaction_role_message_id
-    global reaction_role_emoji
     global reaction_role_role
+    global reaction_role_emoji
+    global reaction_role_message_id
     message_id = payload.message_id
     emoji = reaction_role_emoji
-    for id in reaction_role_message_id:
-        if id == None:
-            if emoji == payload.emoji.name:
-                guild_id = payload.guild_id
-                guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
 
-                role = reaction_role_role
+    if reaction_role_message_id == None:
+        if emoji == payload.emoji.name:
+            guild_id = payload.guild_id
+            guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
 
-                if role is not None:
-                    member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
-                    if member is not None:
-                        await discord.Member.add_roles(member, role)
-                        print(f"Added {role} to {member}")
-                    else:
-                        print(f"Error while adding role: member {member} not found")
+            role = reaction_role_role
+
+            if role is not None:
+                member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
+                if member is not None:
+                    await discord.Member.add_roles(member, role)
+                    print(f"Added {role} to {member}")
                 else:
-                    print(f"Error while adding role: role {role} not found")
+                    print(f"Error while adding role: member {member} not found")
             else:
-                print(f'Error while adding reaction role: emoji "{emoji}" not found')
-            
-        
-        if f"{message_id}" == id:
-            if emoji == payload.emoji.name:
-                guild_id = payload.guild_id
-                guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
+                print(f"Error while adding role: role {role} not found")
+        else:
+            print(f'Error while adding reaction role: emoji "{emoji}" not found')
 
-                role = reaction_role_role
 
-                if role is not None:
-                    member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
-                    if member is not None:
-                        await discord.Member.add_roles(member, role)
-                        print(f"Added {role} to {member}")
-                    else:
-                        print(f"Error while adding role: member {member} not found")
+
+    if f"{message_id}" == reaction_role_message_id:
+        if emoji == payload.emoji.name:
+            guild_id = payload.guild_id
+            guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
+
+            role = reaction_role_role
+
+            if role is not None:
+                member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
+                if member is not None:
+                    await discord.Member.add_roles(member, role)
+                    print(f"Added {role} to {member}")
                 else:
-                    print(f"Error while adding role: role {role} not found")
+                    print(f"Error while adding role: member {member} not found")
             else:
-                print(f'Error while adding reaction role: emoji "{emoji}" not found')
+                print(f"Error while adding role: role {role} not found")
+        else:
+            print(f'Error while adding reaction role: emoji "{emoji}" not found')
 
 
 @bot.event
@@ -608,12 +628,12 @@ async def clear(ctx, content=None):
 @bot.command()
 @commands.has_permissions(manage_messages=True)
 async def reactrole(ctx, emoji, role: discord.Role, message_id=None):
-    global reaction_role_message_id
-    global reaction_role_emoji
     global reaction_role_role
+    global reaction_role_emoji
+    global reaction_role_message_id
     reaction_role_role = role
     reaction_role_emoji = emoji
-    reaction_role_message_id.append(message_id)
+    reaction_role_message_id = message_id
     await ctx.send(f"Added reaction role {emoji}")
     print(f"Added reaction role emoji= '{emoji}' message= '{message_id}' role= '{role}'")
 
@@ -650,4 +670,4 @@ async def displayembed(ctx):
 async def status_change():
     await bot.change_presence(status=discord.Status.idle, activity=discord.Game(next(status)))
 
-bot.run("NzI3OTY3MjUyNjU3NDcxNTUw.Xv3lgQ.pAbzJB1U9I96gAebehGSS2EEmus")
+bot.run("NTM1NDg4MjYxODc1ODI2Njk5.Xwhpyw.rF1OTvcCTyh22RFwBBe55EDHtww")
