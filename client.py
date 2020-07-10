@@ -259,6 +259,17 @@ async def on_raw_reaction_remove(payload):
             if member is not None:
                 await discord.Member.remove_roles(member, role)
                 print(f"Removed {role} from {member}")
+    if reaction_role_message_id == None:
+        if emoji == payload.emoji.name:
+            guild_id = payload.guild_id
+            guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
+
+            role = reaction_role_role
+
+            member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
+            if member is not None:
+                await discord.Member.remove_roles(member, role)
+                print(f"Removed {role} from {member}")
 
 # BotCommands
 @bot.command()
