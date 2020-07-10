@@ -34,7 +34,7 @@ say_content = ""
 async def on_ready():
     status_change.start()
     os.system("cls")
-    print('\u001b[36mBot status= "Ready"\u001b[37m')
+    print('Bot status= Ready')
 
 @bot.event
 async def on_member_join(member):
@@ -670,4 +670,4 @@ async def displayembed(ctx):
 async def status_change():
     await bot.change_presence(status=discord.Status.idle, activity=discord.Game(next(status)))
 
-bot.run("NTM1NDg4MjYxODc1ODI2Njk5.Xwhpyw.rF1OTvcCTyh22RFwBBe55EDHtww")
+bot.run("NzI3OTY3MjUyNjU3NDcxNTUw.Xv3lgQ.pAbzJB1U9I96gAebehGSS2EEmus")
