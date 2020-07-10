@@ -218,6 +218,26 @@ async def on_raw_reaction_add(payload):
     global reaction_role_role
     message_id = payload.message_id
     emoji = reaction_role_emoji
+    if reaction_role_message_id == None:
+        if emoji == payload.emoji.name:
+            guild_id = payload.guild_id
+            guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
+
+            role = reaction_role_role
+
+            if role is not None:
+                member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
+                if member is not None:
+                    await discord.Member.add_roles(member, role)
+                    print(f"Added {role} to {member}")
+                else:
+                    print(f"Error while adding role: member {member} not found")
+            else:
+                print(f"Error while adding role: role {role} not found")
+        else:
+            print(f'Error while adding reaction role: emoji "{emoji}" not found')
+        
+    
     if f"{message_id}" == reaction_role_message_id:
         if emoji == payload.emoji.name:
             guild_id = payload.guild_id
@@ -395,7 +415,7 @@ async def help(ctx, rank=None):
         help_all.add_field(name="`.8ball [question]`", value="Gives you a random answer to a question.", inline=True)
         help_all.add_field(name="`.coinflip`", value="Flips a coin, random answer heads or trails.", inline=True)
         help_all.add_field(name="`.ping`", value="Sends the bots ping in milliseconds.", inline=True)
-        help_fun.add_field(name="`.rps`", value="Plays a game of rock, paper, scissors with you.", inline=True)
+        help_all.add_field(name="`.rps`", value="Plays a game of rock, paper, scissors with you.", inline=True)
         help_all.add_field(name="`.invite`", value="Sends a invite for the bot.", inline=True)
         help_all.add_field(name="`.warn [user] [reason]`", value="Sends a warning to a member.", inline=True)
         help_all.add_field(name="`.kick [user] [reason]`", value="Kicks a member from the server.", inline=True)
@@ -567,7 +587,7 @@ async def clear(ctx, content=None):
 
 @bot.command()
 @commands.has_permissions(manage_messages=True)
-async def reactrole(ctx, message_id, emoji, role: discord.Role):
+async def reactrole(ctx, emoji, role: discord.Role, message_id):
     global reaction_role_message_id
     global reaction_role_emoji
     global reaction_role_role
