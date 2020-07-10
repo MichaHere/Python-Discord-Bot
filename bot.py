@@ -9,7 +9,7 @@ from itertools import cycle
 import discord
 from discord.ext import commands, tasks
 
-client = commands.Bot(command_prefix = ".")
+client = commands.Bot(command_prefix = '.')
 status = cycle(["your commands", ".help to ask for help", "helpful commands"])
 
 client.remove_command("help")
