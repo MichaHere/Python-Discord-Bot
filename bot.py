@@ -1,18 +1,17 @@
-import array
-import asyncio
+import discord
 import json
-import os
 import random
 import time
+import os
+import array
+import asyncio
 from itertools import cycle
+from  discord.ext import commands, tasks
 
-import discord
-from discord.ext import commands, tasks
-
-client = commands.Bot(command_prefix = '.')
+bot = commands.Bot(command_prefix = ".")
 status = cycle(["your commands", ".help to ask for help", "helpful commands"])
 
-client.remove_command("help")
+bot.remove_command("help")
 
 reaction_role_message_id = ""
 reaction_role_emoji = ""
@@ -24,28 +23,48 @@ say_make_title = False
 say_content = ""
 
 
-#client events
-@client.event
+#bot events
+@bot.event
 async def on_ready():
     status_change.start()
+    os.system("cls")
     print('Bot status= Ready')
 
-@client.event
+@bot.event
 async def on_member_join(member):
     print(f"{member} has joined server {member.guild}:{member.guild.id}")
 
-@client.event
+@bot.event
 async def on_member_remove(member):
     print(f"{member} has left server {member.guild}:{member.guild.id}")
 
+@bot.event
+async def on_guild_join(guild):
+    with open('prefix.json', 'r') as x:
+        prefixses = json.load(x)
 
-@client.event
+    prefixses[str(guild.id)] = "b!/"
+
+    with open('prefix.json', 'w') as x:
+        json.dump(prefixses, x, indent=4)
+
+@bot.event
+async def on_guild_remove(guild):
+    with open('prefix.json', 'r') as x:
+        prefixses = json.load(x)
+
+    prefixses.pop(str(guild.id))
+
+    with open('prefix.json', 'w') as x:
+        json.dump(prefixses, x, indent=4)
+
+@bot.event
 async def on_command_error(ctx, error):
-    print(f"Bot Command Error: {error}")
+    print(f"\u001b[31;1mBot Command Error: {error}\u001b[37m")
     if not isinstance(error, commands.CommandNotFound):
         await ctx.send(f"```java\n{error}\n```")
 
-@client.event
+@bot.event
 async def on_message(message):
     global rock_paper_scissors, rock_paper_scissors_channel, rock_paper_scissors_play, say_make_title, say_content
     filter = ["fuck", "kut", "idioot", "godverdomme", "f*ck", "k*t", "idiot", "bitch", "b*tch", "asshole", "*sshole", "assh*le", "*ssh*le", "*diot", "id*ot", "idi*t", "*d*ot", "id**t", "*di*t", "*d**t", "hoer", "homo", "h*mo", "hom*", "h*m*", "lul", "tering", "t*ring", "klootzak", "klootz*k", "fck", "btch", "ass", "gvd", "f**k", "dick", "d*ck"]
@@ -72,7 +91,7 @@ async def on_message(message):
 
             await message.author.send(embed=warned)
             print(f"Warned {message.author} for swearing: using bad words")
-            await client.process_commands(message)
+            await bot.process_commands(message)
 
     if say_make_title == True:
         content = message.content
@@ -201,12 +220,12 @@ async def on_message(message):
                 
 
 
-@client.event
+@bot.event
 async def convert(ctx, reason):
     reason = await commands.MemberConverter().convert(ctx, reason)
 
 
-@client.event
+@bot.event
 async def on_raw_reaction_add(payload):
     global reaction_role_role
     global reaction_role_emoji
@@ -217,7 +236,7 @@ async def on_raw_reaction_add(payload):
     if reaction_role_message_id == None:
         if emoji == payload.emoji.name:
             guild_id = payload.guild_id
-            guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
+            guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
 
             role = reaction_role_role
 
@@ -238,7 +257,7 @@ async def on_raw_reaction_add(payload):
     if f"{message_id}" == reaction_role_message_id:
         if emoji == payload.emoji.name:
             guild_id = payload.guild_id
-            guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
+            guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
 
             role = reaction_role_role
 
@@ -255,14 +274,14 @@ async def on_raw_reaction_add(payload):
             print(f'Error while adding reaction role: emoji "{emoji}" not found')
 
 
-@client.event
+@bot.event
 async def on_raw_reaction_remove(payload):
     global reaction_role_emoji
     global reaction_role_role
     emoji = reaction_role_emoji
     if emoji == payload.emoji.name:
         guild_id = payload.guild_id
-        guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
+        guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
 
         role = reaction_role_role
 
@@ -273,13 +292,13 @@ async def on_raw_reaction_remove(payload):
         
 
 # BotCommands
-@client.command()
+@bot.command()
 async def invite(ctx):
     invite = discord.Embed(description="`Invite link` has been send :banana:", colour=discord.Colour.from_rgb(250, 255, 0))
     await ctx.send(embed=invite)
     invite = discord.Embed(
         title="Invite Link:",
-        description="https://discord.com/api/oauth2/authorize?client_id=727967252657471550&permissions=8&scope=client",
+        description="https://discord.com/api/oauth2/authorize?client_id=727967252657471550&permissions=8&scope=bot",
         colour=discord.Colour.from_rgb(250, 250, 0)
     )
 
@@ -291,12 +310,12 @@ async def invite(ctx):
     await ctx.author.send(embed=invite)
     print(f"An invite link has been send to {ctx.author}")
 
-@client.command()
+@bot.command()
 async def ping(ctx):
-    await ctx.send(f":banana:'s ping is around: `{round(client.latency * 1000)}ms`")
-    print(f"{ctx.author} has checked the client ping: {round(client.latency * 1000)}ms")
+    await ctx.send(f":banana:'s ping is around: `{round(bot.latency * 1000)}ms`")
+    print(f"{ctx.author} has checked the bot ping: {round(bot.latency * 1000)}ms")
 
-@client.command()
+@bot.command()
 async def userinfo(ctx, member: discord.Member = None):
     if member is None:
         member = ctx.author
@@ -315,12 +334,12 @@ async def userinfo(ctx, member: discord.Member = None):
 
     await ctx.send(embed=userinfo)
 
-@client.command()
+@bot.command()
 async def coinflip(ctx):
     coin = ["Heads", "Trails"]
     await ctx.send(f"I threw `{random.choice(coin)}` :banana:")
 
-@client.command()
+@bot.command()
 async def rps(ctx, choice=None):
     global rock_paper_scissors, rock_paper_scissors_channel, rock_paper_scissors_play
     if choice is None:
@@ -337,7 +356,7 @@ async def rps(ctx, choice=None):
     rock_paper_scissors_channel = ctx.channel
 
 
-@client.command(aliases=['8ball'])
+@bot.command(aliases=['8ball'])
 async def _8ball(ctx, *, question):
     responses = ["As I see it, yes.",
                  "Ask again later.",
@@ -362,7 +381,7 @@ async def _8ball(ctx, *, question):
 
     await ctx.send(f"`Question:` {question}\n`Answer:` {random.choice(responses)}")
 
-@client.command()
+@bot.command()
 async def help(ctx, rank=None):
     if rank is None:
         help = discord.Embed(
@@ -395,7 +414,7 @@ async def help(ctx, rank=None):
         help_admin.add_field(name="`.softban [user]`", value="Bans and unbans a user quickly.", inline=False)
         help_admin.add_field(name="`.clear [amount/all]`", value="Clears the chat of a text channel.", inline=False)
         help_admin.add_field(name="`.reactrole [emoji] [role] [mesage_id]`", value="Adds a role to a member if they react.", inline=False)
-        help_admin.add_field(name="`.say [message]`", value="Lat the client send a message for you.", inline=False)
+        help_admin.add_field(name="`.say [message]`", value="Lat the bot send a message for you.", inline=False)
 
         await ctx.send(embed=help_admin)
     if rank == "fun":
@@ -411,7 +430,7 @@ async def help(ctx, rank=None):
         help_fun.add_field(name="`.8ball [question]`", value="Gives you a random answer to a question.", inline=True)
         help_fun.add_field(name="`.coinflip`", value="Flips a coin, random answer heads or trails.", inline=True)
         help_fun.add_field(name="`.ping`", value="Sends the bots ping in milliseconds.", inline=True)
-        help_fun.add_field(name="`.invite`", value="Sends a invite for the client.", inline=True)
+        help_fun.add_field(name="`.invite`", value="Sends a invite for the bot.", inline=True)
         help_fun.add_field(name="`.userinfo`", value="Replays the user info of a user.", inline=True)
         help_fun.add_field(name="`.rps`", value="Plays a game of rock, paper, scissors with you.", inline=True)
 
@@ -431,7 +450,7 @@ async def help(ctx, rank=None):
         help_all.add_field(name="`.coinflip`", value="Flips a coin, random answer heads or trails.", inline=True)
         help_all.add_field(name="`.ping`", value="Sends the bots ping in milliseconds.", inline=True)
         help_all.add_field(name="`.rps`", value="Plays a game of rock, paper, scissors with you.", inline=True)
-        help_all.add_field(name="`.invite`", value="Sends a invite for the client.", inline=True)
+        help_all.add_field(name="`.invite`", value="Sends a invite for the bot.", inline=True)
         help_all.add_field(name="`.warn [user] [reason]`", value="Sends a warning to a member.", inline=True)
         help_all.add_field(name="`.kick [user] [reason]`", value="Kicks a member from the server.", inline=True)
         help_all.add_field(name="`.ban [user] [reason]`", value="Bans a member from the server.", inline=True)
@@ -441,13 +460,13 @@ async def help(ctx, rank=None):
         help_all.add_field(name="`.userinfo`", value="Replays the user info of a user.", inline=True)
         help_all.add_field(name="`.welcome [text channel/remove]`", value="Sets up a channel where join messages come in.", inline=True)
         help_all.add_field(name="`.softban [user]`", value="Bans and unbans a user quickly.", inline=True)
-        help_all.add_field(name="`.say [message]`", value="Lat the client send a message for you.", inline=True)
+        help_all.add_field(name="`.say [message]`", value="Lat the bot send a message for you.", inline=True)
 
         await ctx.send(embed=help_all)
 
 
 # AdminCommands
-@client.command()
+@bot.command()
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, member: discord.Member, *, reason=None):
     kicked = discord.Embed(
@@ -472,7 +491,7 @@ async def kick(ctx, member: discord.Member, *, reason=None):
 
 
 
-@client.command()
+@bot.command()
 @commands.has_permissions(kick_members=True)
 async def warn(ctx, member: discord.Member, *, reason):
     await ctx.send(f"{member} had been warned")
@@ -494,7 +513,7 @@ async def warn(ctx, member: discord.Member, *, reason):
     await member.send(embed=warned)
     print(f"{ctx.author} warned {member} for {reason}")
 
-@client.command()
+@bot.command()
 @commands.has_permissions(ban_members=True)
 async def ban(ctx, member: discord.Member, *, reason=None):
     banned = discord.Embed(
@@ -517,7 +536,7 @@ async def ban(ctx, member: discord.Member, *, reason=None):
     await ctx.send(f"Banned: {member.mention}")
     print(f"{ctx.author} banned {member} for {reason} > {ctx.guild}:{ctx.guild.id}")
 
-@client.command()
+@bot.command()
 @commands.has_permissions(ban_members=True)
 async def unban(ctx, member):
     banned_users = await ctx.guild.bans()
@@ -555,7 +574,7 @@ async def unban(ctx, member):
             return
 
 
-@client.command()
+@bot.command()
 @commands.has_permissions(ban_members=True)
 async def softban(ctx, member: discord.Member, reason=None):
     softbanned = discord.Embed(
@@ -579,7 +598,7 @@ async def softban(ctx, member: discord.Member, reason=None):
     await ctx.send(f"Softbanned: {member}")
     print(f"{ctx.author} softbanned {member} for {reason} > {ctx.guild}:{ctx.guild.id}")
 
-@client.command()
+@bot.command()
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx, content=None):
     if content == "all":
@@ -600,7 +619,7 @@ async def clear(ctx, content=None):
         await ctx.channel.purge(limit=1)
 
 
-@client.command()
+@bot.command()
 @commands.has_permissions(manage_messages=True)
 async def reactrole(ctx, emoji, role: discord.Role, message_id=None):
     global reaction_role_role
@@ -614,7 +633,7 @@ async def reactrole(ctx, emoji, role: discord.Role, message_id=None):
 
 
 
-@client.command()
+@bot.command()
 @commands.has_permissions(manage_messages=True)
 async def say(ctx, *, message):
     global say_make_title, say_content
@@ -622,7 +641,7 @@ async def say(ctx, *, message):
     say_content = message
     await ctx.send("What kind of `title do you prefer?`")
 
-@client.command()
+@bot.command()
 @commands.has_permissions(administrator=True)
 async def displayembed(ctx):
     embed = discord.Embed(
@@ -643,6 +662,6 @@ async def displayembed(ctx):
 
 @tasks.loop(seconds=60)
 async def status_change():
-    await client.change_presence(status=discord.Status.idle, activity=discord.Game(next(status)))
+    await bot.change_presence(status=discord.Status.idle, activity=discord.Game(next(status)))
 
-client.run("NTM1NDg4MjYxODc1ODI2Njk5.Xwhpyw.rF1OTvcCTyh22RFwBBe55EDHtww")
+bot.run("NTM1NDg4MjYxODc1ODI2Njk5.Xwhpyw.rF1OTvcCTyh22RFwBBe55EDHtww")
