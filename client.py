@@ -585,6 +585,8 @@ async def clear(ctx, content=None):
         await ctx.channel.purge()
         await ctx.send("I have cleared `all your messages`:+1:")
         print(f"Cleared all messages in {ctx.channel} > {ctx.guild}:{ctx.guild.id}")
+        time.sleep(3)
+        await ctx.channel.purge(limit=1)
 
     else:
         amount = int(content)
@@ -594,6 +596,8 @@ async def clear(ctx, content=None):
         else:
             await ctx.send(f"`I have cleared {amount} messages`:+1:")
         print(f"Cleared {amount} messages in {ctx.channel} > {ctx.guild}:{ctx.guild.id}")
+        time.sleep(3)
+        await ctx.channel.purge(limit=1)
 
 
 @bot.command()
