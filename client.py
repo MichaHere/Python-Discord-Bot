@@ -53,7 +53,7 @@ async def on_command_error(ctx, error):
 @bot.event
 async def on_message(message):
     global rock_paper_scissors, rock_paper_scissors_channel, rock_paper_scissors_play, say_make_title, say_content
-    filter = ["fuck", "kut", "idioot", "godverdomme", "f*ck", "k*t", "idiot", "bitch", "b*tch", "asshole", "*sshole", "assh*le", "*ssh*le", "*diot", "id*ot", "idi*t", "*d*ot", "id**t", "*di*t", "*d**t", "hoer", "homo", "h*mo", "hom*", "h*m*", "lul", "tering", "t*ring", "klootzak", "klootz*k", "fck", "btch", "ass", "gvd", "f**k", "dick", "d*ck", "cock", "c*ck", "tit", "t*t", "penis", "p*nis", "pen*s", "p*n*s"]
+    filter = ["fuck", "kut", "idioot", "godverdomme", "f*ck", "k*t", "idiot", "bitch", "b*tch", "asshole", "*sshole", "assh*le", "*ssh*le", "*diot", "id*ot", "idi*t", "*d*ot", "id**t", "*di*t", "*d**t", "hoer", "homo", "h*mo", "hom*", "h*m*", "lul", "tering", "t*ring", "klootzak", "klootz*k", "fck", "btch", "ass", "gvd", "f**k", "dick", "d*ck", "cock", "c*ck", "penis", "p*nis", "pen*s", "p*n*s"]
 
     for word in filter:
         if message.content.count(word) > 0 :
