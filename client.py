@@ -245,17 +245,20 @@ async def on_raw_reaction_add(payload):
 async def on_raw_reaction_remove(payload):
     global reaction_role_emoji
     global reaction_role_role
+    global reaction_role_message_id
+    message_id = payload.message_id
     emoji = reaction_role_emoji
-    if emoji == payload.emoji.name:
-        guild_id = payload.guild_id
-        guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
+    if f"{message_id}" == reaction_role_message_id:
+        if emoji == payload.emoji.name:
+            guild_id = payload.guild_id
+            guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
 
-        role = reaction_role_role
+            role = reaction_role_role
 
-        member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
-        if member is not None:
-            await discord.Member.remove_roles(member, role)
-            print(f"Removed {role} from {member}")
+            member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
+            if member is not None:
+                await discord.Member.remove_roles(member, role)
+                print(f"Removed {role} from {member}")
 
 # BotCommands
 @bot.command()
