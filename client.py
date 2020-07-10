@@ -59,6 +59,7 @@ async def on_message(message):
         if message.content.count(word) > 0 :
             print("%s has cursed" % (message.author))
             await message.channel.purge(limit=1)
+    await bot.process_commands(message)
 
     if say_make_title == True:
         content = message.content
@@ -584,6 +585,7 @@ async def clear(ctx, content=None):
         await ctx.channel.purge()
         await ctx.send("I have cleared `all your messages`:+1:")
         print(f"Cleared all messages in {ctx.channel} > {ctx.guild}:{ctx.guild.id}")
+
     else:
         amount = int(content)
         await ctx.channel.purge(limit=amount + 1)
