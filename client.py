@@ -63,7 +63,7 @@ async def on_message(message):
 
     if say_make_title == True:
         content = message.content
-        if not content == "What kind of `title do you prefer?`" and content.startswith(".say") == False:
+        if not content == "What title `do you prefer?`" and content.startswith(".say") == False:
             say = discord.Embed(
             title=f"{message.content}",
             description=f"{say_content}",
@@ -616,7 +616,7 @@ async def say(ctx, *, message):
     global say_make_title, say_content
     say_make_title = True
     say_content = message
-    await ctx.send("What kind of `title do you prefer?`")
+    await ctx.send("What title `do you prefer?`")
 
 @bot.command()
 @commands.has_permissions(administrator=True)
