@@ -379,7 +379,7 @@ async def help(ctx, rank=None):
         help_admin.add_field(name="`.unban [username and tag]`", value="Clears a ban of a member.", inline=False)
         help_admin.add_field(name="`.softban [user]`", value="Bans and unbans a user quickly.", inline=False)
         help_admin.add_field(name="`.clear [amount/all]`", value="Clears the chat of a text channel.", inline=False)
-        help_admin.add_field(name="`.reactrole [mesage_id] [emoji] [role]`", value="Adds a role to a member if they react.", inline=False)
+        help_admin.add_field(name="`.reactrole [emoji] [role] [mesage_id]`", value="Adds a role to a member if they react.", inline=False)
         help_admin.add_field(name="`.say [message]`", value="Lat the bot send a message for you.", inline=False)
 
         await ctx.send(embed=help_admin)
@@ -422,7 +422,7 @@ async def help(ctx, rank=None):
         help_all.add_field(name="`.ban [user] [reason]`", value="Bans a member from the server.", inline=True)
         help_all.add_field(name="`.unban [username and tag]`", value="Clears a ban of a member.", inline=True)
         help_all.add_field(name="`.clear [amount/all]`", value="Clears the chat of a text channel.", inline=True)
-        help_all.add_field(name="`.reactrole [mesage_id] [emoji] [role]`", value="Adds a role to a member if they react.", inline=True)
+        help_all.add_field(name="`.reactrole [emoji] [role] [mesage_id]`", value="Adds a role to a member if they react.", inline=True)
         help_all.add_field(name="`.userinfo`", value="Replays the user info of a user.", inline=True)
         help_all.add_field(name="`.welcome [text channel/remove]`", value="Sets up a channel where join messages come in.", inline=True)
         help_all.add_field(name="`.softban [user]`", value="Bans and unbans a user quickly.", inline=True)
@@ -587,7 +587,7 @@ async def clear(ctx, content=None):
 
 @bot.command()
 @commands.has_permissions(manage_messages=True)
-async def reactrole(ctx, emoji, role: discord.Role, message_id):
+async def reactrole(ctx, emoji, role: discord.Role, message_id=None):
     global reaction_role_message_id
     global reaction_role_emoji
     global reaction_role_role
