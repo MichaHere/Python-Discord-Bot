@@ -47,7 +47,7 @@ async def on_guild_remove(guild):
 @bot.event
 async def on_command_error(ctx, error):
     print(f"Bot Command Error: {error}")
-    if not isinstance(error, commands.CommandNotFound) or not isinstance(error, discord.errors.NotFound):
+    if not isinstance(error, commands.CommandNotFound):
         await ctx.send(f"```java\n{error}\n```")
 
 @bot.event
@@ -595,12 +595,18 @@ async def clear(ctx, content=None, user: discord.Member = None):
         if amount_clear == 1:
             msg = await ctx.send("`I have cleared 1 message`:+1:")
             time.sleep(3)
-            await msg.delete()
+            try:
+                await msg.delete()
+            except all:
+                pass
         else:
             msg = await ctx.send(f"`I have cleared {amount_clear} messages`:+1:")
         print(f"Cleared {amount_clear} messages in {ctx.channel} > {ctx.guild}:{ctx.guild.id}")
         time.sleep(3)
-        await msg.delete()
+        try:
+            await msg.delete()
+        except all:
+            pass
 
 @bot.command()
 @commands.has_permissions(manage_messages=True)
