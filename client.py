@@ -370,7 +370,7 @@ async def help(ctx, rank=None):
         )
 
         help.set_footer(text="#Help Command")
-        help.set_image(url="https://media.discordapp.net/attachments/619413581145833472/729693870396538910/ezgif-5-3c9c28b0609b.gif?width=622&height=350")
+        help.set_image(url="https://media.discordapp.net/attachments/731575466313384047/731575678922915840/ezgif-5-3c9c28b0609b.gif?width=770&height=433")
         help.set_author(name="Banathon Help", icon_url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
         help.set_thumbnail(
             url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
@@ -457,7 +457,7 @@ async def kick(ctx, member: discord.Member, *, reason=None):
     )
 
     kicked.set_footer(text=f"#Kicked From {ctx.guild}.")
-    kicked.set_image(url="https://media.discordapp.net/attachments/619413581145833472/729688446070816788/ezgif-5-945a4fd6a78c.gif?width=622&height=350")
+    kicked.set_image(url="https://media.discordapp.net/attachments/731575466313384047/731575546458406922/ezgif-5-945a4fd6a78c.gif?width=770&height=433")
     kicked.set_thumbnail(
         url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
     kicked.set_author(name="Banathon",
@@ -483,7 +483,7 @@ async def warn(ctx, member: discord.Member, *, reason):
     )
 
     warned.set_footer(text=f"#Warned On {ctx.guild}")
-    warned.set_image(url="https://media.discordapp.net/attachments/619413581145833472/729690305648918568/ezgif-5-8f75a4ba685b.gif?width=622&height=350")
+    warned.set_image(url="https://media.discordapp.net/attachments/731575466313384047/731575588132880424/ezgif-5-8f75a4ba685b.gif?width=770&height=433")
     warned.set_thumbnail(
         url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
     warned.set_author(name="Banathon",
@@ -504,7 +504,7 @@ async def ban(ctx, member: discord.Member, *, reason=None):
     )
 
     banned.set_footer(text=f"#Banned From {ctx.guild}")
-    banned.set_image(url="https://media.discordapp.net/attachments/619413581145833472/729689453240778882/ezgif-5-27034f09e27b.gif?width=622&height=350")
+    banned.set_image(url="https://media.discordapp.net/attachments/731575466313384047/731575511456940042/ezgif-5-27034f09e27b.gif?width=770&height=433")
     banned.set_thumbnail(
         url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
     banned.set_author(name="Banathon",
@@ -538,6 +538,7 @@ async def unban(ctx, member):
                 )
 
                 unbanned.set_footer(text=f"#Unbanned From {ctx.guild}")
+                unbanned.set_image("https://media.discordapp.net/attachments/731575466313384047/731576678039420978/ezgif-5-ef158df232ad.gif?width=770&height=433")
                 unbanned.set_thumbnail(
                     url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
                 unbanned.set_author(name="Banathon",
@@ -565,7 +566,7 @@ async def softban(ctx, member: discord.Member, reason=None):
     )
 
     softbanned.set_footer(text=f"#Softbanned From {ctx.guild}")
-    softbanned.set_image(url="https://media.discordapp.net/attachments/619413581145833472/729689453240778882/ezgif-5-27034f09e27b.gif?width=622&height=350")
+    softbanned.set_image(url="https://media.discordapp.net/attachments/731575466313384047/731577801001402368/ezgif-5-74f747d8f941.gif?width=770&height=433")
     softbanned.set_thumbnail(
         url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
     softbanned.set_author(name="Banathon",
