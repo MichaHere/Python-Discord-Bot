@@ -645,6 +645,6 @@ async def displayembed(ctx):
 
 @tasks.loop(seconds=60)
 async def status_change():
-    await bot.change_presence(status=discord.Status.idle, activity=discord.Game(next(status)))
+    await bot.change_presence(status=discord.Status.online, activity=discord.Game(next(status)))
 
 bot.run("NzI3OTY3MjUyNjU3NDcxNTUw.Xv3lgQ.pAbzJB1U9I96gAebehGSS2EEmus")
