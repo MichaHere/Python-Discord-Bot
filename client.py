@@ -47,7 +47,7 @@ async def on_guild_remove(guild):
 @bot.event
 async def on_command_error(ctx, error):
     print(f"Bot Command Error: {error}")
-    if not isinstance(error, commands.CommandNotFound):
+    if not isinstance(error, commands.CommandNotFound) or not isinstance(error, discord.errors.NotFound):
         await ctx.send(f"```java\n{error}\n```")
 
 @bot.event
