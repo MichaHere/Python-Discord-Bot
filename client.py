@@ -566,7 +566,7 @@ async def softban(ctx, member: discord.Member, reason=None):
     )
 
     softbanned.set_footer(text=f"#Softbanned From {ctx.guild}")
-    softbanned.set_image(url="https://media.discordapp.net/attachments/731575466313384047/731577801001402368/ezgif-5-74f747d8f941.gif?width=770&height=433")
+    softbanned.set_image(url="https://media.discordapp.net/attachments/731575466313384047/731581048030363708/ezgif-5-c6f62afa8eae.gif?width=770&height=433")
     softbanned.set_thumbnail(
         url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
     softbanned.set_author(name="Banathon",
