@@ -64,6 +64,7 @@ async def on_message(message):
     if say_make_title == True:
         content = message.content
         if not content == "What title `do you prefer?`" and content.startswith(".say") == False:
+            await message.channel.purge(limit=3)
             say = discord.Embed(
             title=f"{message.content}",
             description=f"{say_content}",
