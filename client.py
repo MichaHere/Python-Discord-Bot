@@ -598,9 +598,9 @@ async def clear(ctx, content=None, user: discord.Member = None):
             await msg.delete()
         else:
             msg = await ctx.send(f"`I have cleared {amount_clear} messages`:+1:")
-        print(f"Cleared {amount_clear} messages in {ctx.channel} > {ctx.guild}:{ctx.guild.id}")
-        time.sleep(3)
-        await msg.delete()
+            print(f"Cleared {amount_clear} messages in {ctx.channel} > {ctx.guild}:{ctx.guild.id}")
+            time.sleep(3)
+            await msg.delete()
 
 @bot.command()
 @commands.has_permissions(manage_messages=True)
