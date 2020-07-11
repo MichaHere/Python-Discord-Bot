@@ -580,25 +580,26 @@ async def softban(ctx, member: discord.Member, reason=None):
 
 @bot.command()
 @commands.has_permissions(manage_messages=True)
-async def clear(ctx, content=None):
+async def clear(ctx, content=None, user: discord.Member = None):
     if content == None:
         await ctx.channel.purge()
-        await ctx.send("I have cleared `all your messages`:+1:")
+        msg = await ctx.send("I have cleared `all your messages`:+1:")
         print(f"Cleared all messages in {ctx.channel} > {ctx.guild}:{ctx.guild.id}")
         time.sleep(3)
-        await ctx.channel.purge(limit=1)
+        await msg.delete()
 
     else:
-        amount = int(content)
-        await ctx.channel.purge(limit=amount + 1)
-        if amount == 1:
-            await ctx.send("`I have cleared 1 message`:+1:")
+        amount_clear = int(content)
+        await ctx.channel.purge(limit=amount_clear + 1)
+        if amount_clear == 1:
+            msg = await ctx.send("`I have cleared 1 message`:+1:")
+            time.sleep(3)
+            await msg.delete()
         else:
-            await ctx.send(f"`I have cleared {amount} messages`:+1:")
-        print(f"Cleared {amount} messages in {ctx.channel} > {ctx.guild}:{ctx.guild.id}")
+            msg = await ctx.send(f"`I have cleared {amount_clear} messages`:+1:")
+        print(f"Cleared {amount_clear} messages in {ctx.channel} > {ctx.guild}:{ctx.guild.id}")
         time.sleep(3)
-        await ctx.channel.purge(limit=1)
-
+        await msg.delete()
 
 @bot.command()
 @commands.has_permissions(manage_messages=True)
