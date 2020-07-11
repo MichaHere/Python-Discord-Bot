@@ -538,7 +538,7 @@ async def unban(ctx, member):
                 )
 
                 unbanned.set_footer(text=f"#Unbanned From {ctx.guild}")
-                unbanned.set_image("https://media.discordapp.net/attachments/731575466313384047/731576678039420978/ezgif-5-ef158df232ad.gif?width=770&height=433")
+                unbanned.set_image(url="https://media.discordapp.net/attachments/731575466313384047/731576678039420978/ezgif-5-ef158df232ad.gif?width=770&height=433")
                 unbanned.set_thumbnail(
                     url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
                 unbanned.set_author(name="Banathon",
