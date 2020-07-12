@@ -294,7 +294,7 @@ async def invite(ctx):
 
 @client.command()
 async def ping(ctx):
-    await ctx.send(f":banana:'s ping is around: `{round(client.latency * 1000)}ms`")
+    await ctx.send(f"Pong! :banana:'s ping is around: `{round(client.latency * 1000)}ms`")
     print(f"{ctx.author} has checked the client ping: {round(client.latency * 1000)}ms")
 
 @client.command()
