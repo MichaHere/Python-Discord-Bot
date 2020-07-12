@@ -54,7 +54,10 @@ async def on_command_error(ctx, error):
 @client.event
 async def on_message(message):
     global rock_paper_scissors, rock_paper_scissors_channel, rock_paper_scissors_play, say_make_title, say_content
-    filter = ["fuck", "kut", "idioot", "godverdomme", "f*ck", "k*t", "idiot", "bitch", "b*tch", "asshole", "*sshole", "assh*le", "*ssh*le", "*diot", "id*ot", "idi*t", "*d*ot", "id**t", "*di*t", "*d**t", "hoer", "homo", "h*mo", "hom*", "h*m*", "tering", "t*ring", "klootzak", "klootz*k", "fck", "btch", "gvd", "f**k", "dick", "d*ck", "cock", "c*ck", "penis", "p*nis", "pen*s", "p*n*s"]
+    filter = ["fuck", "kut", "idioot", "godverdomme", "f*ck", "k*t", "idiot", "bitch", "b*tch", "asshole", "*sshole", "assh*le", "*ssh*le", "*diot", "id*ot", "idi*t", "*d*ot", "id**t", "*di*t", "*d**t", 
+    "hoer", "homo", "h*mo", "hom*", "h*m*", "tering", "t*ring", "klootzak", "klootz*k", "fck", "btch", "gvd", "f**k", "dick", "d*ck", "cock", "c*ck", "penis", "p*nis", "pen*s", "p*n*s", 
+    "sex", "s*x", "porn", "prick", "bastard", "bellend", "gobdaw", "fecker", "ráicleach", "cúl tóna", "aiteann", "salope", "Slut"
+    ]
 
     for word in filter:
         if message.content.count(word) > 0 :
@@ -479,6 +482,31 @@ async def help(ctx, rank=None):
 
 
 # AdminCommands
+@client.command()
+@commands.has_permissions(manage_messages=True)
+async def mute(ctx, member: discord.Member, channel: discord.TextChannel=None):
+    async with ctx.channel.typing():
+        if channel == None:
+            for allChannels in ctx.guild.channels:
+                await discord.TextChannel.set_permissions(allChannels, member, overwrite=discord.PermissionOverwrite(send_messages=False))
+            await ctx.send(f"Muted `{member}`")
+        else:
+            await discord.TextChannel.set_permissions(channel, member, overwrite=discord.PermissionOverwrite(send_messages=False))
+            await ctx.send(f"Muted `{member}`")
+
+@client.command()
+@commands.has_permissions(manage_messages=True)
+async def unmute(ctx, member: discord.Member, channel: discord.TextChannel=None):
+    async with ctx.channel.typing():
+        if channel == None:
+            for allChannels in ctx.guild.channels:
+                await discord.TextChannel.set_permissions(allChannels, member, overwrite=discord.PermissionOverwrite(send_messages=True))
+            await ctx.send(f"Unmuted `{member}`")
+        else:
+            await discord.TextChannel.set_permissions(channel, member, overwrite=discord.PermissionOverwrite(send_messages=True))
+            await ctx.send(f"Unmuted `{member}`")
+
+
 @client.command()
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, member: discord.Member, *, reason=None):
