@@ -644,8 +644,8 @@ async def reactrole(ctx, emoji, role: discord.Role, message_id=None):
     reaction_role_role = role
     reaction_role_emoji = emoji
     reaction_role_message_id = message_id
-    await ctx.send(f"Added reaction role {emoji}")
-    print(f"Added reaction role emoji= '{emoji}' message= '{message_id}' role= '{role}'")
+    await ctx.send(f"Made reaction role {emoji}")
+    print(f"Made reaction role emoji= '{emoji}' message= '{message_id}' role= '{role}'")
 
 
 
