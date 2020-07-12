@@ -3,6 +3,7 @@ import json
 import random
 import time
 import os
+import aiohttp
 import asyncio
 from  discord.ext import commands, tasks
 from itertools import cycle
@@ -336,6 +337,34 @@ async def rps(ctx, choice=None):
     rock_paper_scissors = 1
     rock_paper_scissors_channel = ctx.channel
 
+@client.command()
+async def cat(ctx):
+    async with ctx.channel.typing():
+        async with aiohttp.ClientSession() as cs:
+            async with cs.get("https://aws.random.cat/meow") as r:
+                data = await r.json()
+                embed = discord.Embed(
+                    title="A cat over here! Meow!",
+                    colour=discord.Colour.from_rgb(255, 255, 0)
+                )
+                embed.set_image(url=data['file'])
+                
+                await ctx.send(embed=embed)
+
+@client.command()
+async def dog(ctx):
+    async with ctx.channel.typing():
+        async with aiohttp.ClientSession() as cs:
+            async with cs.get("https://random.dog/woof.json") as r:
+                data = await r.json()
+                embed = discord.Embed(
+                    title="Here is a dog! Woof!",
+                    colour=discord.Colour.from_rgb(255, 255, 0)
+                )
+                embed.set_image(url=data['url'])
+                
+                await ctx.send(embed=embed)
+
 
 @client.command(aliases=['8ball'])
 async def _8ball(ctx, *, question):
@@ -414,6 +443,8 @@ async def help(ctx, rank=None):
         help_fun.add_field(name="`.invite`", value="Sends a invite for the client.", inline=True)
         help_fun.add_field(name="`.userinfo`", value="Replays the user info of a user.", inline=True)
         help_fun.add_field(name="`.rps`", value="Plays a game of rock, paper, scissors with you.", inline=True)
+        help_fun.add_field(name="`.dog`", value="Displays a random image of a dog.", inline=True)
+        help_fun.add_field(name="`.cat`", value="Reveals a arbitrary image of a cat.", inline=True)
 
         await ctx.send(embed=help_fun)
 
@@ -442,6 +473,8 @@ async def help(ctx, rank=None):
         help_all.add_field(name="`.welcome [text channel/remove]`", value="Sets up a channel where join messages come in.", inline=True)
         help_all.add_field(name="`.softban [user]`", value="Bans and unbans a user quickly.", inline=True)
         help_all.add_field(name="`.say [message]`", value="Lat the client send a message for you.", inline=True)
+        help_fun.add_field(name="`.dog`", value="Displays a random image of a dog.", inline=True)
+        help_fun.add_field(name="`.cat`", value="Reveals a arbitrary image of a cat.", inline=True)
 
         await ctx.send(embed=help_all)
 
