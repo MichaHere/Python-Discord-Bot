@@ -500,7 +500,7 @@ async def mute(ctx, member: discord.Member, channel: discord.TextChannel=None):
             await ctx.send(f"Muted `{member}`")
         else:
             await discord.TextChannel.set_permissions(channel, member, overwrite=discord.PermissionOverwrite(send_messages=False))
-            await ctx.send(f"Muted `{member}`")
+            await ctx.send(f"Muted `{member}` in `{channel}`")
 
 @client.command()
 @commands.has_permissions(manage_messages=True)
@@ -508,11 +508,11 @@ async def unmute(ctx, member: discord.Member, channel: discord.TextChannel=None)
     async with ctx.channel.typing():
         if channel == None:
             for allChannels in ctx.guild.channels:
-                await discord.TextChannel.set_permissions(allChannels, member, overwrite=discord.PermissionOverwrite(send_messages=True))
+                await discord.TextChannel.set_permissions(allChannels, member, overwrite=None)
             await ctx.send(f"Unmuted `{member}`")
         else:
-            await discord.TextChannel.set_permissions(channel, member, overwrite=discord.PermissionOverwrite(send_messages=True))
-            await ctx.send(f"Unmuted `{member}`")
+            await discord.TextChannel.set_permissions(channel, member, overwrite=None)
+            await ctx.send(f"Unmuted `{member}` in `{channel}`")
 
 @client.command()
 @commands.has_permissions(manage_messages=True)
@@ -535,12 +535,12 @@ async def channelunmute(ctx, channel: discord.TextChannel=None):
     async with ctx.channel.typing():
         if channel == None:
             for allMembers in ctx.guild.members:
-                await discord.TextChannel.set_permissions(ctx.channel, allMembers, overwrite=discord.PermissionOverwrite(send_messages=True))
+                await discord.TextChannel.set_permissions(ctx.channel, allMembers, overwrite=None)
 
             await ctx.send(f"Unmuted `{ctx.channel}`")
         else:
             for allMembers in ctx.guild.members:
-                await discord.TextChannel.set_permissions(channel, allMembers, overwrite=discord.PermissionOverwrite(send_messages=True))
+                await discord.TextChannel.set_permissions(channel, allMembers, overwrite=None)
 
             await ctx.send(f"Unmuted `{ctx.channel}`")
 
