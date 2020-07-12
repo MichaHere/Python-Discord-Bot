@@ -1,2 +1,2 @@
 discord
-iaohttp
+iaohttp = 3.6.2
