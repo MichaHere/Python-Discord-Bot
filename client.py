@@ -54,7 +54,7 @@ async def on_command_error(ctx, error):
 @client.event
 async def on_message(message):
     global rock_paper_scissors, rock_paper_scissors_channel, rock_paper_scissors_play, say_make_title, say_content
-    filter = ["fuck", "kut", "idioot", "godverdomme", "f*ck", "k*t", "idiot", "bitch", "b*tch", "asshole", "*sshole", "assh*le", "*ssh*le", "*diot", "id*ot", "idi*t", "*d*ot", "id**t", "*di*t", "*d**t", "hoer", "homo", "h*mo", "hom*", "h*m*", "lul", "tering", "t*ring", "klootzak", "klootz*k", "fck", "btch", "gvd", "f**k", "dick", "d*ck", "cock", "c*ck", "penis", "p*nis", "pen*s", "p*n*s"]
+    filter = ["fuck", "kut", "idioot", "godverdomme", "f*ck", "k*t", "idiot", "bitch", "b*tch", "asshole", "*sshole", "assh*le", "*ssh*le", "*diot", "id*ot", "idi*t", "*d*ot", "id**t", "*di*t", "*d**t", "hoer", "homo", "h*mo", "hom*", "h*m*", "tering", "t*ring", "klootzak", "klootz*k", "fck", "btch", "gvd", "f**k", "dick", "d*ck", "cock", "c*ck", "penis", "p*nis", "pen*s", "p*n*s"]
 
     for word in filter:
         if message.content.count(word) > 0 :
@@ -473,8 +473,8 @@ async def help(ctx, rank=None):
         help_all.add_field(name="`.welcome [text channel/remove]`", value="Sets up a channel where join messages come in.", inline=True)
         help_all.add_field(name="`.softban [user]`", value="Bans and unbans a user quickly.", inline=True)
         help_all.add_field(name="`.say [message]`", value="Lat the client send a message for you.", inline=True)
-        help_fun.add_field(name="`.dog`", value="Displays a random image of a dog.", inline=True)
-        help_fun.add_field(name="`.cat`", value="Reveals a arbitrary image of a cat.", inline=True)
+        help_all.add_field(name="`.dog`", value="Displays a random image of a dog.", inline=True)
+        help_all.add_field(name="`.cat`", value="Reveals a arbitrary image of a cat.", inline=True)
 
         await ctx.send(embed=help_all)
 
