@@ -21,10 +21,6 @@ rock_paper_scissors_channel = ""
 rock_paper_scissors_play = 0
 say_make_title = False
 say_content = ""
-send_welcome = False
-welcome_channel = ""
-send_bye = False
-bye_channel = ""
 
 
 #client events
@@ -35,24 +31,11 @@ async def on_ready():
 
 @client.event
 async def on_member_join(member):
-    global send_welcome, welcome_channel
-    print(f"{member} has joined server {member.guild}:{member.guild.id}")    
-    if send_welcome == True:
-        for channel in member.guild.channels:
-            if channel == welcome_channel:
-                await channel.send(f"**{member.name}**, welcome to **{member.guild.name}**!")
-                send_welcome = False
-
+    print(f"{member} has joined server {member.guild}:{member.guild.id}")
 
 @client.event
 async def on_member_remove(member):
-    global send_bye, bye_channel    
     print(f"{member} has left server {member.guild}:{member.guild.id}")
-    if send_bye == True:
-        for channel in member.guild.channels:
-            if channel == bye_channel:
-                await channel.send(f"**{member.name}** left **{member.guild.name}**, bye!")
-                send_bye = False
 
 @client.event
 async def on_guild_join(guild):
@@ -507,26 +490,6 @@ async def help(ctx, rank=None):
 
 
 # AdminCommands
-@client.command()
-@commands.has_permissions(manage_messages=True)
-async def welcome(ctx, channel: discord.TextChannel=None):
-    global send_welcome, welcome_channel
-    if channel == None:
-        channel = ctx.channel
-    send_welcome = True
-    welcome_channel = channel
-    await ctx.send(f"Made **{channel}** welcome channel")
-
-@client.command()
-@commands.has_permissions(manage_messages=True)
-async def bye(ctx, channel: discord.TextChannel=None):
-    global send_bye, bye_channel    
-    if channel == None:
-        channel = ctx.channel
-    send_bye = True
-    bye_channel = channel
-    await ctx.send(f"Made **{channel}** bye channel")
-
 @client.command()
 @commands.has_permissions(manage_messages=True)
 async def mute(ctx, member: discord.Member, channel: discord.TextChannel=None):
