@@ -48,7 +48,7 @@ async def on_guild_remove(guild):
 @client.event
 async def on_command_error(ctx, error):
     print(f"client Command Error: {error}")
-    if not isinstance(error, commands.CommandNotFound):
+    if not isinstance(error, commands.CommandNotFound, commands.NoPrivateMessage):
         await ctx.send(f"```java\n{error}\n```")
 
 @client.event
