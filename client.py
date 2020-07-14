@@ -194,8 +194,6 @@ async def on_message(message):
                 responses_rock_embed = [scissors_scissors, scissors_paper, scissors_rock]
                 await message.channel.send(embed=random.choice(responses_rock_embed))
                 
-
-
 @client.event
 async def convert(ctx, reason):
     reason = await commands.MemberConverter().convert(ctx, reason)
@@ -248,7 +246,6 @@ async def on_raw_reaction_add(payload):
         else:
             print(f'Error while adding reaction role: emoji "{emoji}" not found')
 
-
 @client.event
 async def on_raw_reaction_remove(payload):
     global reaction_role_emoji
@@ -278,6 +275,7 @@ async def on_raw_reaction_remove(payload):
             if member is not None:
                 await discord.Member.remove_roles(member, role)
                 print(f"Removed {role} from {member}")
+
 
 # clientCommands
 @client.command()
@@ -427,7 +425,6 @@ async def dog(ctx):
                 embed.set_image(url=data['url'])
                 
                 await ctx.send(embed=embed)
-
 
 @client.command(aliases=['8ball'])
 async def _8ball(ctx, *, question):
@@ -602,7 +599,6 @@ async def channelunmute(ctx, channel: discord.TextChannel=None):
 
             await ctx.send(f"Unmuted `{ctx.channel}`")
 
-
 @client.command()
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, member: discord.Member, *, reason=None):
@@ -625,8 +621,6 @@ async def kick(ctx, member: discord.Member, *, reason=None):
     await member.kick(reason=reason)
     await ctx.send(f"Kicked: {member.mention}")
     print(f"{ctx.author} kicked {member} for {reason} > {ctx.guild}:{ctx.guild.id}")
-
-
 
 @client.command()
 @commands.has_permissions(kick_members=True)
@@ -711,7 +705,6 @@ async def unban(ctx, member):
             print(f"Unban Error: {member} not on banned entry")
             return
 
-
 @client.command()
 @commands.has_permissions(ban_members=True)
 async def softban(ctx, member: discord.Member, reason=None):
@@ -770,8 +763,6 @@ async def reactrole(ctx, emoji, role: discord.Role, message_id=None):
     reaction_role_message_id = message_id
     await ctx.send(f"Made reaction role {emoji}")
     print(f"Made reaction role emoji= '{emoji}' message= '{message_id}' role= '{role}'")
-
-
 
 @client.command()
 @commands.has_permissions(manage_messages=True)
