@@ -5,6 +5,7 @@ import time
 import os
 import aiohttp
 import asyncio
+import praw
 from  discord.ext import commands, tasks
 from itertools import cycle
 
@@ -12,6 +13,9 @@ client = commands.Bot(command_prefix = ".")
 status = cycle(["your commands", ".help to ask for help", "helpful commands"])
 
 client.remove_command("help")
+
+REDDIT_APP_ID = "k3jhvHbGJpQvRA"
+REDDIT_APP_SECRET = "TDsbBQ2oHMDSJo7Rxao8MSoW2GM"
 
 reaction_role_message_id = ""
 reaction_role_emoji = ""
@@ -294,6 +298,63 @@ async def invite(ctx):
 
     await ctx.author.send(embed=invite)
     print(f"An invite link has been send to {ctx.author}")
+        
+@client.command()
+async def reddit(ctx, subreddit):
+    if REDDIT_APP_ID and REDDIT_APP_SECRET:
+        reddit = praw.Reddit(client_id=REDDIT_APP_ID, 
+        client_secret = REDDIT_APP_SECRET, user_agent="BANATHON:%s:1.5" % 
+        REDDIT_APP_ID)
+    
+    async with ctx.channel.typing():
+        if reddit:
+            if subreddit:
+                posts = reddit.subreddit(subreddit).hot()
+                post_picker = random.randint(1, 100)
+
+                for i in range(0, post_picker):
+                    i = next(x for x in posts if not x.stickied)
+                if not i.over_18:
+                    submission = discord.Embed(
+                        title= i.title,
+                        colour=discord.Colour.from_rgb(255, 128, 0)
+                    )
+                    submission.set_footer(text=f"🔺 {i.score} | 💬 {i.num_comments}")
+                    submission.set_image(url=i.url)
+                    await ctx.send(embed=submission)
+                else:
+                    await ctx.send("You **_cannot_** request **NSFW** supmissions")
+            else:
+                await ctx.send("Please request an `existing subreddit`")
+
+        else:
+            await ctx.send("Please request an **subreddit**")
+            
+@client.command()
+async def meme(ctx):
+    if REDDIT_APP_ID and REDDIT_APP_SECRET:
+        reddit = praw.Reddit(client_id=REDDIT_APP_ID, 
+        client_secret = REDDIT_APP_SECRET, user_agent="BANATHON:%s:1.5" % 
+        REDDIT_APP_ID)
+    
+    subreddit = "memes"
+
+    async with ctx.channel.typing():
+        if reddit:
+            posts = reddit.subreddit(subreddit).hot()
+            post_picker = random.randint(1, 100)
+
+            for i in range(0, post_picker):
+                i = next(x for x in posts if not x.stickied)
+            submission = discord.Embed(
+                title= i.title,
+                colour=discord.Colour.from_rgb(255, 128, 0)
+            )
+            submission.set_footer(text=f"🔺 {i.score} | 💬 {i.num_comments}")
+            submission.set_image(url=i.url)
+            await ctx.send(embed=submission)
+        else:
+            await ctx.send("Please request an **subreddit**")
 
 @client.command()
 async def ping(ctx):
