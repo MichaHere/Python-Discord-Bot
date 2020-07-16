@@ -717,7 +717,7 @@ async def embed(ctx, *, message):
 
 @client.command()
 @commands.has_permissions(manage_messages=True)
-async def embed(ctx, *, message):
+async def say(ctx, *, message):
     await ctx.send(f"{message}")
 
 @client.command()
