@@ -22,8 +22,8 @@ reaction_role_role = ""
 rock_paper_scissors = 0
 rock_paper_scissors_channel = ""
 rock_paper_scissors_play = 0
-say_make_title = False
-say_content = ""
+Embed_make_title = False
+Embed_content = ""
 
 
 #client events
@@ -56,7 +56,7 @@ async def on_command_error(ctx, error):
 
 @client.event
 async def on_message(message):
-    global rock_paper_scissors, rock_paper_scissors_channel, rock_paper_scissors_play, say_make_title, say_content
+    global rock_paper_scissors, rock_paper_scissors_channel, rock_paper_scissors_play, Embed_make_title, Embed_content
     filter = ["fuck", "kut", "idioot", "godverdomme", "f*ck", "k*t", "idiot", "bitch", "b*tch", "asshole", "*sshole", "assh*le", "*ssh*le", "*diot", "id*ot", "idi*t", "*d*ot", "id**t", "*di*t", "*d**t", 
     "hoer", "homo", "h*mo", "hom*", "h*m*", "tering", "t*ring", "klootzak", "klootz*k", "fck", "btch", "gvd", "f**k", "dick", "d*ck", "cock", "c*ck", "penis", "p*nis", "pen*s", "p*n*s", 
     "sex", "s*x", "porn", "prick", "bastard", "bellend", "gobdaw", "fecker", "ráicleach", "cúl tóna", "aiteann", "salope", "Slut"
@@ -68,19 +68,19 @@ async def on_message(message):
             await message.channel.purge(limit=1)
     await client.process_commands(message)
 
-    if say_make_title == True:
+    if Embed_make_title == True:
         content = message.content
-        if not content == "What title `do you prefer?`" and content.startswith(".say") == False:
+        if not content == "What title `do you prefer?`" and content.startswith(".embed") == False:
             await message.channel.purge(limit=3)
-            say = discord.Embed(
+            Embed = discord.Embed(
             title=f"{message.content}",
-            description=f"{say_content}",
+            description=f"{Embed_content}",
             colour=discord.Colour.from_rgb(255, 255, 0),
             )
-            say.set_footer(text= f"#From {message.author}")
+            Embed.set_footer(text= f"#From {message.author}")
             
-            say_make_title = False
-            await message.channel.send(embed=say)
+            Embed_make_title = False
+            await message.channel.send(embed=Embed)
             
     
     if rock_paper_scissors == 1:
@@ -426,7 +426,7 @@ async def help(ctx, rank=None):
         help_admin.add_field(name="`.unban [username and tag]`", value="Clears a ban of a member.", inline=True)
         help_admin.add_field(name="`.softban [user]`", value="Bans and unbans a user quickly.", inline=True)
         help_admin.add_field(name="`.clear [amount/all]`", value="Clears the chat of a text channel.", inline=True)
-        help_admin.add_field(name="`.say [message]`", value="Let the bot send a message for you.", inline=True)
+        help_admin.add_field(name="`.Embed [message]`", value="Let the bot send a message for you.", inline=True)
         help_admin.add_field(name="`.mute [user] (channel)`", value="Mutes a user in one/all channel(s)", inline=True)
         help_admin.add_field(name="`.unmute [user] (channel)`", value="Unmutes a user in one/all channel(s)", inline=True)
         help_admin.add_field(name="`.channelmute [channel]`", value="Mutes a channel", inline=True) 
@@ -480,7 +480,7 @@ async def help(ctx, rank=None):
         help_all.add_field(name="`.rps`", value="Plays a game of rock, paper, scissors with you.", inline=True)
         help_all.add_field(name="`.invite`", value="Sends a invite for the bot.", inline=True)
         help_all.add_field(name="`.userinfo`", value="Sends the information of a user.", inline=True)
-        help_all.add_field(name="`.say [message]`", value="Let the bot send a message for you.", inline=True)
+        help_all.add_field(name="`.Embed [message]`", value="Let the bot send a message for you.", inline=True)
         help_all.add_field(name="`.dog`", value="Displays a random image of a dog.", inline=True)
         help_all.add_field(name="`.cat`", value="Reveals a arbitrary image of a cat.", inline=True)
 
@@ -709,11 +709,16 @@ async def reactrole(ctx, emoji, role: discord.Role, message_id=None):
 
 @client.command()
 @commands.has_permissions(manage_messages=True)
-async def say(ctx, *, message):
-    global say_make_title, say_content
-    say_make_title = True
-    say_content = message
+async def embed(ctx, *, message):
+    global Embed_make_title, Embed_content
+    Embed_make_title = True
+    Embed_content = message
     await ctx.send("What title `do you prefer?`")
+
+@client.command()
+@commands.has_permissions(manage_messages=True)
+async def embed(ctx, *, message):
+    await ctx.send(f"{message}")
 
 @client.command()
 @commands.has_permissions(administrator=True)
