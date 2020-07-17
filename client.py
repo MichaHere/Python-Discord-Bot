@@ -289,9 +289,9 @@ async def invite(ctx):
     )
 
     invite.set_footer(text="#Banathon Invite Link")
-    invite.set_image(url="https://media.discordapp.net/attachments/619413581145833472/729691884351651931/ezgif-5-c742e4b59516.gif?width=622&height=350")
-    invite.set_author(name="Banathon Invite", icon_url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
-    invite.set_thumbnail(url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
+    invite.set_image(url="https://media.discordapp.net/attachments/731575466313384047/733704616579170324/ezgif-5-c742e4b59516.gif?width=640&height=360")
+    invite.set_author(name="Banathon Invite", icon_url="https://cdn.discordapp.com/avatars/727967252657471550/ed55927886ccf4368b8f364ead00280c.png?size=128")
+    invite.set_thumbnail(url="https://cdn.discordapp.com/avatars/727967252657471550/ed55927886ccf4368b8f364ead00280c.png?size=128")
 
     await ctx.author.send(embed=invite)
     print(f"An invite link has been send to {ctx.author}")
@@ -556,9 +556,9 @@ async def kick(ctx, member: discord.Member, *, reason=None):
     kicked.set_footer(text=f"#Kicked From {ctx.guild}.")
     kicked.set_image(url="https://media.discordapp.net/attachments/731575466313384047/731575546458406922/ezgif-5-945a4fd6a78c.gif?width=770&height=433")
     kicked.set_thumbnail(
-        url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
+        url="https://cdn.discordapp.com/avatars/727967252657471550/ed55927886ccf4368b8f364ead00280c.png?size=128")
     kicked.set_author(name="Banathon",
-                     icon_url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
+                     icon_url="https://cdn.discordapp.com/avatars/727967252657471550/ed55927886ccf4368b8f364ead00280c.png?size=128")
     kicked.add_field(name="Reason", value=f"{reason}", inline=False)
     kicked.add_field(name="Info", value="If you want more info, please contact our staff. You can join back in if you want.", inline=False)
 
@@ -580,9 +580,9 @@ async def warn(ctx, member: discord.Member, *, reason):
     warned.set_footer(text=f"#Warned On {ctx.guild}")
     warned.set_image(url="https://media.discordapp.net/attachments/731575466313384047/731575588132880424/ezgif-5-8f75a4ba685b.gif?width=770&height=433")
     warned.set_thumbnail(
-        url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
+        url="https://cdn.discordapp.com/avatars/727967252657471550/ed55927886ccf4368b8f364ead00280c.png?size=128")
     warned.set_author(name="Banathon",
-                     icon_url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
+                     icon_url="https://cdn.discordapp.com/avatars/727967252657471550/ed55927886ccf4368b8f364ead00280c.png?size=128")
     warned.add_field(name="Reason", value=f"{reason}", inline=False)
     warned.add_field(name="Info", value="If you want more information, please contact our staff.", inline=False)
 
@@ -601,9 +601,9 @@ async def ban(ctx, member: discord.Member, *, reason=None):
     banned.set_footer(text=f"#Banned From {ctx.guild}")
     banned.set_image(url="https://media.discordapp.net/attachments/731575466313384047/731575511456940042/ezgif-5-27034f09e27b.gif?width=770&height=433")
     banned.set_thumbnail(
-        url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
+        url="https://cdn.discordapp.com/avatars/727967252657471550/ed55927886ccf4368b8f364ead00280c.png?size=128")
     banned.set_author(name="Banathon",
-                     icon_url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
+                     icon_url="https://cdn.discordapp.com/avatars/727967252657471550/ed55927886ccf4368b8f364ead00280c.png?size=128")
     banned.add_field(name="Reason", value=f"{reason}", inline=False)
     banned.add_field(name="Info", value="If you want more information, please contact our staff.", inline=False)
 
@@ -635,9 +635,9 @@ async def unban(ctx, member):
                 unbanned.set_footer(text=f"#Unbanned From {ctx.guild}")
                 unbanned.set_image(url="https://media.discordapp.net/attachments/731575466313384047/731582587541258340/ezgif-5-2c051b9beafd.gif?width=770&height=433")
                 unbanned.set_thumbnail(
-                    url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
+                    url="https://cdn.discordapp.com/avatars/727967252657471550/ed55927886ccf4368b8f364ead00280c.png?size=128")
                 unbanned.set_author(name="Banathon",
-                                  icon_url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
+                                  icon_url="https://cdn.discordapp.com/avatars/727967252657471550/ed55927886ccf4368b8f364ead00280c.png?size=128")
                 unbanned.add_field(name="General Info", value="Feel free to join back in.\nIf you want more information, you can contact our staff.", inline=False)
                 unbanned.add_field(name="Ban Info", value=f"{discord.Guild.bans(user)}", inline=True)
 
@@ -662,9 +662,9 @@ async def softban(ctx, member: discord.Member, reason=None):
     softbanned.set_footer(text=f"#Softbanned From {ctx.guild}")
     softbanned.set_image(url="https://media.discordapp.net/attachments/731575466313384047/731581048030363708/ezgif-5-c6f62afa8eae.gif?width=770&height=433")
     softbanned.set_thumbnail(
-        url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
+        url="https://cdn.discordapp.com/avatars/727967252657471550/ed55927886ccf4368b8f364ead00280c.png?size=128")
     softbanned.set_author(name="Banathon",
-                     icon_url="https://cdn.discordapp.com/avatars/727967252657471550/1fcacc779f361241eb5505e4de99ed81.png?size=128")
+                     icon_url="https://cdn.discordapp.com/avatars/727967252657471550/ed55927886ccf4368b8f364ead00280c.png?size=128")
     softbanned.add_field(name="Reason", value=f"{reason}", inline=False)
     softbanned.add_field(name="Info", value="If you want more information, please contact our staff. You can join back in if you want.", inline=False)
 
