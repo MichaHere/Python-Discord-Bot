@@ -199,14 +199,14 @@ async def convert(ctx, reason):
 async def on_raw_reaction_add(payload):
     message_id = payload.message_id
     emoji = "🍌"
-    reaction_role_message_id = "731938596608540692"
+    reaction_role_message_id = 731938596608540692
 
     if reaction_role_message_id == None:
         if emoji == payload.emoji.name:
             guild_id = payload.guild_id
             guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
 
-            role = "731197131817222175"
+            role = 731197131817222175
 
             if role is not None:
                 member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
@@ -227,7 +227,7 @@ async def on_raw_reaction_add(payload):
             guild_id = payload.guild_id
             guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
 
-            role = "731197131817222175"
+            role = 731197131817222175
 
             if role is not None:
                 member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
@@ -245,13 +245,13 @@ async def on_raw_reaction_add(payload):
 async def on_raw_reaction_remove(payload):
     message_id = payload.message_id
     emoji = "🍌"
-    reaction_role_message_id = "731938596608540692"
+    reaction_role_message_id = 731938596608540692
     if f"{message_id}" == reaction_role_message_id:
         if emoji == payload.emoji.name:
             guild_id = payload.guild_id
             guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
 
-            role = "731197131817222175"
+            role = 731197131817222175
 
             member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
             if member is not None:
@@ -263,7 +263,7 @@ async def on_raw_reaction_remove(payload):
             guild_id = payload.guild_id
             guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
 
-            role = "731197131817222175"
+            role = 731197131817222175
 
             member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
             if member is not None:
