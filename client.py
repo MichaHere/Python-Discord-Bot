@@ -211,7 +211,7 @@ async def on_raw_reaction_add(payload):
             if role is not None:
                 member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
                 if member is not None:
-                    await discord.Member.add_roles(member, role)
+                    await discord.Member.add_roles(member.id, role)
                     print(f"Added {role} to {member}")
                 else:
                     print(f"Error while adding role: member {member} not found")
@@ -232,7 +232,7 @@ async def on_raw_reaction_add(payload):
             if role is not None:
                 member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
                 if member is not None:
-                    await discord.Member.add_roles(member, role)
+                    await discord.Member.add_roles(member.id, role)
                     print(f"Added {role} to {member}")
                 else:
                     print(f"Error while adding role: member {member} not found")
@@ -255,7 +255,7 @@ async def on_raw_reaction_remove(payload):
 
             member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
             if member is not None:
-                await discord.Member.remove_roles(member, role)
+                await discord.Member.remove_roles(member.id, role)
                 print(f"Removed {role} from {member}")
 
     if reaction_role_message_id == None:
@@ -267,7 +267,7 @@ async def on_raw_reaction_remove(payload):
 
             member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
             if member is not None:
-                await discord.Member.remove_roles(member, role)
+                await discord.Member.remove_roles(member.id, role)
                 print(f"Removed {role} from {member}")
 
 
