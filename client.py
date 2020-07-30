@@ -198,7 +198,7 @@ async def convert(ctx, reason):
 @client.event
 async def on_raw_reaction_add(payload):
     message_id = payload.message_id
-    emoji = ":banana:"
+    emoji = "🍌"
     reaction_role_message_id = "731938596608540692"
 
     if reaction_role_message_id == None:
@@ -244,7 +244,7 @@ async def on_raw_reaction_add(payload):
 @client.event
 async def on_raw_reaction_remove(payload):
     message_id = payload.message_id
-    emoji = ":banana:"
+    emoji = "🍌"
     reaction_role_message_id = "731938596608540692"
     if f"{message_id}" == reaction_role_message_id:
         if emoji == payload.emoji.name:
