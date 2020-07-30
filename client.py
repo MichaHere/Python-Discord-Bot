@@ -206,7 +206,7 @@ async def on_raw_reaction_add(payload):
             guild_id = payload.guild_id
             guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
 
-            role = discord.utils.find(lambda r: r.id == payload.role_id, guild.roles)
+            role = discord.utils.get(guild.roles, name="Member")
 
             if role is not None:
                 member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
@@ -227,7 +227,7 @@ async def on_raw_reaction_add(payload):
             guild_id = payload.guild_id
             guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
 
-            role = discord.utils.find(lambda r: r.id == payload.role_id, guild.roles)
+            role = discord.utils.get(guild.roles, name="Member")
 
             if role is not None:
                 member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
@@ -251,7 +251,7 @@ async def on_raw_reaction_remove(payload):
             guild_id = payload.guild_id
             guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
 
-            role = discord.utils.find(lambda r: r.id == payload.role_id, guild.roles)
+            role = discord.utils.get(guild.roles, name="Member")
 
             member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
             if member is not None:
@@ -263,7 +263,7 @@ async def on_raw_reaction_remove(payload):
             guild_id = payload.guild_id
             guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
 
-            role = discord.utils.find(lambda r: r.id == payload.role_id, guild.roles)
+            role = discord.utils.get(guild.roles, name="Member")
 
             member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
             if member is not None:
