@@ -16,9 +16,6 @@ client.remove_command("help")
 REDDIT_APP_ID = "k3jhvHbGJpQvRA"
 REDDIT_APP_SECRET = "TDsbBQ2oHMDSJo7Rxao8MSoW2GM"
 
-reaction_role_message_id = ""
-reaction_role_emoji = ""
-reaction_role_role = ""
 rock_paper_scissors = 0
 rock_paper_scissors_channel = ""
 rock_paper_scissors_play = 0
@@ -200,18 +197,16 @@ async def convert(ctx, reason):
 
 @client.event
 async def on_raw_reaction_add(payload):
-    global reaction_role_role
-    global reaction_role_emoji
-    global reaction_role_message_id
     message_id = payload.message_id
-    emoji = reaction_role_emoji
+    emoji = ":banana:"
+    reaction_role_message_id = "731938596608540692"
 
     if reaction_role_message_id == None:
         if emoji == payload.emoji.name:
             guild_id = payload.guild_id
             guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
 
-            role = reaction_role_role
+            role = "Member"
 
             if role is not None:
                 member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
@@ -232,7 +227,7 @@ async def on_raw_reaction_add(payload):
             guild_id = payload.guild_id
             guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
 
-            role = reaction_role_role
+            role = "Member"
 
             if role is not None:
                 member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
@@ -248,28 +243,27 @@ async def on_raw_reaction_add(payload):
 
 @client.event
 async def on_raw_reaction_remove(payload):
-    global reaction_role_emoji
-    global reaction_role_role
-    global reaction_role_message_id
     message_id = payload.message_id
-    emoji = reaction_role_emoji
+    emoji = ":banana:"
+    reaction_role_message_id = "731938596608540692"
     if f"{message_id}" == reaction_role_message_id:
         if emoji == payload.emoji.name:
             guild_id = payload.guild_id
             guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
 
-            role = reaction_role_role
+            role = "Member"
 
             member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
             if member is not None:
                 await discord.Member.remove_roles(member, role)
                 print(f"Removed {role} from {member}")
+
     if reaction_role_message_id == None:
         if emoji == payload.emoji.name:
             guild_id = payload.guild_id
             guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
 
-            role = reaction_role_role
+            role = "Member"
 
             member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
             if member is not None:
@@ -345,7 +339,7 @@ async def rps(ctx, choice=None):
 async def cat(ctx):
     async with ctx.channel.typing():
         async with aiohttp.ClientSession() as cs:
-            async with cs.get("https://aws.random.cat/meow") as r:
+            async with cs.get("https://cataas.com/cat/") as r:
                 data = await r.json()
                 embed = discord.Embed(
                     title="A cat over here! Meow!",
@@ -696,18 +690,6 @@ async def clear(ctx, content=None, user: discord.Member = None):
             print(f"Cleared {amount_clear} messages in {ctx.channel} > {ctx.guild}:{ctx.guild.id}")
             time.sleep(3)
             await msg.delete()
-
-@client.command()
-@commands.has_permissions(manage_messages=True)
-async def reactrole(ctx, emoji, role: discord.Role, message_id=None):
-    global reaction_role_message_id
-    global reaction_role_emoji
-    global reaction_role_role
-    reaction_role_role = role
-    reaction_role_emoji = emoji
-    reaction_role_message_id = message_id
-    await ctx.send(f"Made reaction role {emoji}")
-    print(f"Made reaction role emoji= '{emoji}' message= '{message_id}' role= '{role}'")
 
 @client.command()
 @commands.has_permissions(manage_messages=True)
