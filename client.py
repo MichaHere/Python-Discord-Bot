@@ -702,6 +702,7 @@ async def embed(ctx, *, message):
 @client.command()
 @commands.has_permissions(manage_messages=True)
 async def say(ctx, *, message):
+    await message.channel.purge(limit=1)
     await ctx.send(f"{message}")
 
 @client.command()
