@@ -339,7 +339,7 @@ async def rps(ctx, choice=None):
 async def cat(ctx):
     async with ctx.channel.typing():
         async with aiohttp.ClientSession() as cs:
-            async with cs.get("https://cataas.com/cat/") as r:
+            async with cs.get("http://www.randomkittengenerator.com/") as r:
                 data = await r.json()
                 embed = discord.Embed(
                     title="A cat over here! Meow!",
@@ -481,7 +481,6 @@ async def help(ctx, rank=None):
         help_all.add_field(name="`.cat`", value="Reveals a arbitrary image of a cat.", inline=True)
 
         await ctx.send(embed=help_all)
-
 
 # AdminCommands
 @client.command()
