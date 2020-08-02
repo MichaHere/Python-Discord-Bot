@@ -445,7 +445,7 @@ async def help(ctx, rank=None):
         help_fun.add_field(name="`.userinfo`", value="Sends the information of a user.", inline=True)
         help_fun.add_field(name="`.rps`", value="Plays a game of rock, paper, scissors with you.", inline=True)
         help_fun.add_field(name="`.dog`", value="Displays a random image of a dog.", inline=True)
-        help_fun.add_field(name="`.cat`", value="Reveals a arbitrary image of a cat.", inline=True)
+        help_fun.add_field(name="`.fox`", value="Reveals a arbitrary image of a fox.", inline=True)
 
         await ctx.send(embed=help_fun)
 
@@ -478,7 +478,7 @@ async def help(ctx, rank=None):
         help_all.add_field(name="`.embed [message]`", value="Send a embed using the bot.", inline=True)
         help_all.add_field(name="`.say [message]`", value="Let the bot send a message for you.", inline=True)
         help_all.add_field(name="`.dog`", value="Displays a random image of a dog.", inline=True)
-        help_all.add_field(name="`.cat`", value="Reveals a arbitrary image of a cat.", inline=True)
+        help_all.add_field(name="`.fox`", value="Reveals a arbitrary image of a fox.", inline=True)
 
         await ctx.send(embed=help_all)
 
