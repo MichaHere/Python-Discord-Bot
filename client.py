@@ -363,6 +363,17 @@ async def dog(ctx):
                 
                 await ctx.send(embed=embed)
 
+@client.command()
+async def cat(ctx):
+    async with ctx.channel.typing():
+        embed = discord.Embed(
+            title="Here's a cat! Meow!",
+            colour=discord.Colour.from_rgb(255, 255, 0)
+        )
+        embed.set_image(url="./theCat.html")
+        
+        await ctx.send(embed=embed)
+
 @client.command(aliases=['8ball'])
 async def _8ball(ctx, *, question):
     responses = ["As I see it, yes.",
