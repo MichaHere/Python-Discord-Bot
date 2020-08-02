@@ -336,13 +336,13 @@ async def rps(ctx, choice=None):
     rock_paper_scissors_channel = ctx.channel
 
 @client.command()
-async def cat(ctx):
+async def fox(ctx):
     async with ctx.channel.typing():
         async with aiohttp.ClientSession() as cs:
-            async with cs.get("http://www.randomkittengenerator.com/") as r:
+            async with cs.get("https://randomfox.ca/floof/") as r:
                 data = await r.json()
                 embed = discord.Embed(
-                    title="A cat over here! Meow!",
+                    title="A fox for you! Floof!",
                     colour=discord.Colour.from_rgb(255, 255, 0)
                 )
                 embed.set_image(url=data['file'])
