@@ -370,7 +370,7 @@ async def cat(ctx):
             title="Here's a cat! Meow!",
             colour=discord.Colour.from_rgb(255, 255, 0)
         )
-        embed.set_image(url="./theCat.html")
+        embed.set_image(url="file:///./theCat.html")
         
         await ctx.send(embed=embed)
 
