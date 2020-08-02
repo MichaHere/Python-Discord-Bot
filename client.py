@@ -345,7 +345,7 @@ async def fox(ctx):
                     title="A fox for you! Floof!",
                     colour=discord.Colour.from_rgb(255, 255, 0)
                 )
-                embed.set_image(url=data['file'])
+                embed.set_image(url=data['image'])
                 
                 await ctx.send(embed=embed)
 
