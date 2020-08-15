@@ -134,6 +134,7 @@ async def on_message(message):
                 
                 responses_rock_embed = [rock_rock, rock_scissors, rock_paper]
                 await message.channel.send(embed=random.choice(responses_rock_embed))
+                return
             
             if "paper" in content or "Paper" in content:
                 rock_paper_scissors += 1
@@ -162,6 +163,7 @@ async def on_message(message):
                 
                 responses_rock_embed = [paper_paper, paper_rock, paper_scissors]
                 await message.channel.send(embed=random.choice(responses_rock_embed))
+                return
             
             if "scissors" in content or "Scissors" in content:
                 rock_paper_scissors += 1
@@ -190,6 +192,7 @@ async def on_message(message):
                 
                 responses_rock_embed = [scissors_scissors, scissors_paper, scissors_rock]
                 await message.channel.send(embed=random.choice(responses_rock_embed))
+                return
                 
 @client.event
 async def convert(ctx, reason):
