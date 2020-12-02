@@ -10,7 +10,6 @@ from itertools import cycle
 
 client = commands.Bot(command_prefix = ".")
 status = cycle(["your commands", ".help to ask for help", "helpful commands"])
-
 client.remove_command("help")
 
 REDDIT_APP_ID = "k3jhvHbGJpQvRA"
@@ -726,8 +725,8 @@ async def displayembed(ctx):
 
     await ctx.send(embed=embed)
 
-@tasks.loop(seconds=1)
+@tasks.loop(seconds=60)
 async def status_change():
-    await client.change_presence(status=discord.Status.online, activity=discord.Game("your commands"))
+    await client.change_presence(status=discord.Status.online, activity=discord.Game(next(status)))
 
 client.run("NzI3OTY3MjUyNjU3NDcxNTUw.XvziVg.fpVN9tbHHOmXWezIEl9usZKycb4")
