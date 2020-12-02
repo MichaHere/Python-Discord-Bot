@@ -11,7 +11,7 @@ from itertools import cycle
 client = commands.Bot(command_prefix = ".")
 status = cycle(["your commands.", "your commands..", "your commands...", "your commands.", "your commands..", "your commands...", 
 ".help to ask for help.", ".help to ask for help..", ".help to ask for help...", ".help to ask for help.", ".help to ask for help..", ".help to ask for help...",
-"helpful commands.", "helpful commands..", "helpful commands...", "helpful commands.", "helpful commands..", "helpful commands...", ])
+"helpful commands.", "helpful commands..", "helpful commands...", "helpful commands.", "helpful commands..", "helpful commands..."])
 
 client.remove_command("help")
 
