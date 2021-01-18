@@ -10,6 +10,7 @@ from itertools import cycle
 
 client = commands.Bot(command_prefix = ".")
 status = cycle(["your commands", ".help to ask for help", "helpful commands"])
+
 client.remove_command("help")
 
 REDDIT_APP_ID = "k3jhvHbGJpQvRA"
@@ -276,7 +277,7 @@ async def on_raw_reaction_remove(payload):
 # clientCommands
 @client.command()
 async def invite(ctx):
-    invite = discord.Embed(description="`Invite link` has been send :banana:", colour=discord.Colour.from_rgb(250, 255, 0))
+    invite = discord.Embed(description="`Invite link` has been send <:banathon:800675192270749698>", colour=discord.Colour.from_rgb(250, 255, 0))
     await ctx.send(embed=invite)
     invite = discord.Embed(
         title="Invite Link:",
@@ -294,7 +295,7 @@ async def invite(ctx):
     
 @client.command()
 async def ping(ctx):
-    await ctx.send(f"Pong! :banana:'s ping is around: `{round(client.latency * 1000)}ms`")
+    await ctx.send(f"Pong! <:banathon:800675192270749698>'s ping is around: `{round(client.latency * 1000)}ms`")
     print(f"{ctx.author} has checked the client ping: {round(client.latency * 1000)}ms")
 
 @client.command()
@@ -319,7 +320,7 @@ async def userinfo(ctx, member: discord.Member = None):
 @client.command()
 async def coinflip(ctx):
     coin = ["Heads", "Trails"]
-    await ctx.send(f"I threw `{random.choice(coin)}` :banana:")
+    await ctx.send(f"I threw `{random.choice(coin)}` <:banathon:800675192270749698>")
 
 @client.command()
 async def rps(ctx, choice=None):
