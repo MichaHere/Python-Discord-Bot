@@ -13,9 +13,6 @@ status = cycle(["your commands", ".help to ask for help", "helpful commands"])
 
 client.remove_command("help")
 
-REDDIT_APP_ID = "k3jhvHbGJpQvRA"
-REDDIT_APP_SECRET = "TDsbBQ2oHMDSJo7Rxao8MSoW2GM"
-
 rock_paper_scissors = 0
 rock_paper_scissors_channel = ""
 rock_paper_scissors_play = 0
