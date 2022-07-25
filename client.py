@@ -54,10 +54,7 @@ async def on_command_error(ctx, error):
 @client.event
 async def on_message(message):
     global rock_paper_scissors, rock_paper_scissors_channel, rock_paper_scissors_play, Embed_make_title, Embed_content
-    filter = ["fuck", "kut", "idioot", "godverdomme", "f*ck", "k*t", "idiot", "bitch", "b*tch", "asshole", "*sshole", "assh*le", "*ssh*le", "*diot", "id*ot", "idi*t", "*d*ot", "id**t", "*di*t", "*d**t",
-    "hoer", "homo", "h*mo", "hom*", "h*m*", "tering", "t*ring", "klootzak", "klootz*k", "fck", "btch", "gvd", "f**k", "dick", "d*ck", "cock", "c*ck", "penis", "p*nis", "pen*s", "p*n*s",
-    "sex", "s*x", "porn", "prick", "bastard", "bellend", "gobdaw", "fecker", "ráicleach", "cúl tóna", "aiteann", "salope", "Slut"
-    ]
+    filter = []
 
     for word in filter:
         if message.content.count(word) > 0 :
