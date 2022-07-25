@@ -54,8 +54,8 @@ async def on_command_error(ctx, error):
 @client.event
 async def on_message(message):
     global rock_paper_scissors, rock_paper_scissors_channel, rock_paper_scissors_play, Embed_make_title, Embed_content
-    filter = ["fuck", "kut", "idioot", "godverdomme", "f*ck", "k*t", "idiot", "bitch", "b*tch", "asshole", "*sshole", "assh*le", "*ssh*le", "*diot", "id*ot", "idi*t", "*d*ot", "id**t", "*di*t", "*d**t", 
-    "hoer", "homo", "h*mo", "hom*", "h*m*", "tering", "t*ring", "klootzak", "klootz*k", "fck", "btch", "gvd", "f**k", "dick", "d*ck", "cock", "c*ck", "penis", "p*nis", "pen*s", "p*n*s", 
+    filter = ["fuck", "kut", "idioot", "godverdomme", "f*ck", "k*t", "idiot", "bitch", "b*tch", "asshole", "*sshole", "assh*le", "*ssh*le", "*diot", "id*ot", "idi*t", "*d*ot", "id**t", "*di*t", "*d**t",
+    "hoer", "homo", "h*mo", "hom*", "h*m*", "tering", "t*ring", "klootzak", "klootz*k", "fck", "btch", "gvd", "f**k", "dick", "d*ck", "cock", "c*ck", "penis", "p*nis", "pen*s", "p*n*s",
     "sex", "s*x", "porn", "prick", "bastard", "bellend", "gobdaw", "fecker", "ráicleach", "cúl tóna", "aiteann", "salope", "Slut"
     ]
 
@@ -75,11 +75,11 @@ async def on_message(message):
             colour=discord.Colour.from_rgb(255, 255, 0),
             )
             Embed.set_footer(text= f"#From {message.author}")
-            
+
             Embed_make_title = False
             await message.channel.send(embed=Embed)
-            
-    
+
+
     if rock_paper_scissors == 1:
         if message.channel == rock_paper_scissors_channel:
             content = message.content
@@ -117,7 +117,7 @@ async def on_message(message):
                 colour=discord.Colour.from_rgb(250, 250, 0)
                 )
                 rock_rock.set_footer(text="#Rock, paper, scissors: Game")
-                
+
                 rock_scissors = discord.Embed(
                 title=":mountain: vs :scissors:",
                 description=f"{random.choice(responses_lose)}",
@@ -131,11 +131,11 @@ async def on_message(message):
                 colour=discord.Colour.from_rgb(250, 250, 0)
                 )
                 rock_paper.set_footer(text="#Rock, paper, scissors: Game")
-                
+
                 responses_rock_embed = [rock_rock, rock_scissors, rock_paper]
                 await message.channel.send(embed=random.choice(responses_rock_embed))
                 return
-            
+
             if "paper" in content or "Paper" in content:
                 rock_paper_scissors += 1
                 if rock_paper_scissors == 2:
@@ -146,7 +146,7 @@ async def on_message(message):
                 colour=discord.Colour.from_rgb(250, 250, 0)
                 )
                 paper_paper.set_footer(text="#Rock, paper, scissors: Game")
-                
+
                 paper_rock = discord.Embed(
                 title=":page_facing_up: vs :mountain:",
                 description=f"{random.choice(responses_lose)}",
@@ -160,11 +160,11 @@ async def on_message(message):
                 colour=discord.Colour.from_rgb(250, 250, 0)
                 )
                 paper_scissors.set_footer(text="#Rock, paper, scissors: Game")
-                
+
                 responses_rock_embed = [paper_paper, paper_rock, paper_scissors]
                 await message.channel.send(embed=random.choice(responses_rock_embed))
                 return
-            
+
             if "scissors" in content or "Scissors" in content:
                 rock_paper_scissors += 1
                 if rock_paper_scissors == 2:
@@ -175,25 +175,25 @@ async def on_message(message):
                 colour=discord.Colour.from_rgb(250, 250, 0)
                 )
                 scissors_scissors.set_footer(text="#Rock, paper, scissors: Game")
-                
+
                 scissors_paper = discord.Embed(
                 title=":scissors: vs :page_facing_up:",
                 description=f"{random.choice(responses_lose)}",
                 colour=discord.Colour.from_rgb(250, 250, 0)
                 )
                 scissors_paper.set_footer(text="#Rock, paper, scissors: Game")
-                
+
                 scissors_rock = discord.Embed(
                 title=":scissors: vs :page_facing_up:",
                 description=f"{random.choice(responses_win)}",
                 colour=discord.Colour.from_rgb(250, 250, 0)
                 )
                 scissors_rock.set_footer(text="#Rock, paper, scissors: Game")
-                
+
                 responses_rock_embed = [scissors_scissors, scissors_paper, scissors_rock]
                 await message.channel.send(embed=random.choice(responses_rock_embed))
                 return
-                
+
 @client.event
 async def convert(ctx, reason):
     reason = await commands.MemberConverter().convert(ctx, reason)
@@ -292,7 +292,7 @@ async def invite(ctx):
 
     await ctx.author.send(embed=invite)
     print(f"An invite link has been send to {ctx.author}")
-    
+
 @client.command()
 async def ping(ctx):
     await ctx.send(f"Pong! <:banathon:800675192270749698>'s ping is around: `{round(client.latency * 1000)}ms`")
@@ -334,7 +334,7 @@ async def rps(ctx, choice=None):
         rps.set_footer(text="#Rock, paper, scissors")
 
         await ctx.send(embed=rps)
-    
+
     rock_paper_scissors = 1
     rock_paper_scissors_channel = ctx.channel
 
@@ -349,7 +349,7 @@ async def fox(ctx):
                     colour=discord.Colour.from_rgb(255, 255, 0)
                 )
                 embed.set_image(url=data['image'])
-                
+
                 await ctx.send(embed=embed)
 
 @client.command()
@@ -363,7 +363,7 @@ async def dog(ctx):
                     colour=discord.Colour.from_rgb(255, 255, 0)
                 )
                 embed.set_image(url=data['url'])
-                
+
                 await ctx.send(embed=embed)
 
 @client.command(aliases=['8ball'])
@@ -424,11 +424,11 @@ async def help(ctx, rank=None):
         help_admin.add_field(name="`.softban [user]`", value="Bans and unbans a user quickly.", inline=True)
         help_admin.add_field(name="`.clear [amount/all]`", value="Clears the chat of a text channel.", inline=True)
         help_admin.add_field(name="`.embed [message]`", value="Send a embed using the bot.", inline=True)
-        help_admin.add_field(name="`.say [message]`", value="Let the bot send a message for you.", inline=True)        
+        help_admin.add_field(name="`.say [message]`", value="Let the bot send a message for you.", inline=True)
         help_admin.add_field(name="`.mute [user] (channel)`", value="Mutes a user in one/all channel(s)", inline=True)
         help_admin.add_field(name="`.unmute [user] (channel)`", value="Unmutes a user in one/all channel(s)", inline=True)
-        help_admin.add_field(name="`.channelmute [channel]`", value="Mutes a channel", inline=True) 
-        help_admin.add_field(name="`.channelunmute [channel]`", value="Unmutes a channel", inline=True) 
+        help_admin.add_field(name="`.channelmute [channel]`", value="Mutes a channel", inline=True)
+        help_admin.add_field(name="`.channelunmute [channel]`", value="Unmutes a channel", inline=True)
 
         await ctx.send(embed=help_admin)
     if rank == "fun":
@@ -468,8 +468,8 @@ async def help(ctx, rank=None):
         help_all.add_field(name="`.kick [user] [reason]`", value="Kicks a member from the server.", inline=True)
         help_all.add_field(name="`.mute [user] (channel)`", value="Mutes a user in one/all channel(s)", inline=True)
         help_all.add_field(name="`.unmute [user] (channel)`", value="Unmutes a user in one/all channel(s)", inline=True)
-        help_all.add_field(name="`.channelmute [channel]`", value="Mutes a channel", inline=True) 
-        help_all.add_field(name="`.channelunmute [channel]`", value="Unmutes a channel", inline=True) 
+        help_all.add_field(name="`.channelmute [channel]`", value="Mutes a channel", inline=True)
+        help_all.add_field(name="`.channelunmute [channel]`", value="Unmutes a channel", inline=True)
         help_all.add_field(name="`.warn [user] [reason]`", value="Sends a warning to a member.", inline=True)
         help_all.add_field(name="`.clear [amount/all]`", value="Clears the chat of a text channel.", inline=True)
         help_all.add_field(name="`.8ball [question]`", value="Gives you a random answer to a question.", inline=True)
@@ -517,7 +517,7 @@ async def channelmute(ctx, channel: discord.TextChannel=None):
         if channel == None:
             for allMembers in ctx.guild.members:
                 await discord.TextChannel.set_permissions(ctx.channel, allMembers, overwrite=discord.PermissionOverwrite(send_messages=False))
-                
+
             await ctx.send(f"Muted `{ctx.channel}`")
         else:
             for allMembers in ctx.guild.members:
@@ -730,4 +730,4 @@ async def displayembed(ctx):
 async def status_change():
     await client.change_presence(status=discord.Status.online, activity=discord.Game(next(status)))
 
-client.run("NzI3OTY3MjUyNjU3NDcxNTUw.XvziVg.fpVN9tbHHOmXWezIEl9usZKycb4")
+client.run("")
