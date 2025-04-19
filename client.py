@@ -8,7 +8,14 @@ import asyncio
 from  discord.ext import commands, tasks
 from itertools import cycle
 
-client = commands.Bot(command_prefix = ".")
+# Paste your token between the quotation marks
+bot_token = ""
+bot_prefix = "."
+
+intents = discord.Intents.default()
+intents.members = True
+
+client = commands.Bot(command_prefix = bot_prefix, intents=intents)
 status = cycle(["your commands", ".help to ask for help", "helpful commands"])
 
 client.remove_command("help")
@@ -724,4 +731,4 @@ async def displayembed(ctx):
 async def status_change():
     await client.change_presence(status=discord.Status.online, activity=discord.Game(next(status)))
 
-client.run("")
+client.run(bot_token)
