@@ -5,26 +5,25 @@ Before you can run the bot, first edit the *bot_token* variable in the `client.p
 
 To run the bot, you first need to make a virtual environment. To do this, make sure you are in the root directory of this project, and run the following commands:
 
-`pip install virtualenv`
-
-`python3 -m venv env`
+    pip install virtualenv
+    python3 -m venv env
 
 To activate the environment you will have to run the following command:
 
 *Using bash:*
 
-`source env/bin/activate`
+    source env/bin/activate
 
 *Using fish:*
 
-`source env/bin/activate.fish`
+    source env/bin/activate.fish
 
 Then to install the requirements for this project run:
 
-`pip install -r requirements.txt`
+    pip install -r requirements.txt
 
 And finaly, run the discord bot using: 
 
-`python3 client.py`
+    python3 client.py
 
 Note that everytime you want to run the project, you will have to run the command to activate the environment again. 
