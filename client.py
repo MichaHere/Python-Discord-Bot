@@ -12,10 +12,7 @@ from itertools import cycle
 bot_token = ""
 bot_prefix = "."
 
-intents = discord.Intents.default()
-intents.members = True
-
-client = commands.Bot(command_prefix = bot_prefix, intents=intents)
+client = commands.Bot(command_prefix=bot_prefix)
 status = cycle(["your commands", ".help to ask for help", "helpful commands"])
 
 client.remove_command("help")
